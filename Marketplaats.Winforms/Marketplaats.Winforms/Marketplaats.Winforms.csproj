@@ -115,6 +115,7 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="img\car.png" />
     <Content Include="img\reload.ico" />
     <Content Include="img\search car.ico" />
   </ItemGroup>
