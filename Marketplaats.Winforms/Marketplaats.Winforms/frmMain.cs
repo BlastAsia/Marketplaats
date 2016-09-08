@@ -178,7 +178,7 @@ namespace Marketplaats.Winforms
             {
                 var phone = hit.SubItem.Text;
                 MessageBox.Show("Do you want to call this seller using Skype","Skype Call",MessageBoxButtons.YesNo,MessageBoxIcon.Question);
-                // etc..
+                
             }
         }
 

@@ -176,6 +176,7 @@
             // PhoneNumber
             // 
             this.PhoneNumber.Text = "Phone Number";
+            this.PhoneNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.PhoneNumber.Width = 120;
             // 
             // frmMain
