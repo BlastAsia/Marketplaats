@@ -41,11 +41,9 @@
             this.Build = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Price = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.PhoneNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.axSkype1 = new AxSKYPE4COMLib.AxSkype();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.axSkype1)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -65,18 +63,18 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 48F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(580, 641);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(577, 641);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.axSkype1);
             this.panel1.Controls.Add(this.lblStatus);
             this.panel1.Controls.Add(this.btnReload);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(13, 13);
+            this.panel1.Location = new System.Drawing.Point(10, 10);
+            this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(554, 42);
+            this.panel1.Size = new System.Drawing.Size(557, 48);
             this.panel1.TabIndex = 2;
             // 
             // lblStatus
@@ -84,7 +82,7 @@
             this.lblStatus.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblStatus.AutoSize = true;
             this.lblStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStatus.Location = new System.Drawing.Point(121, 12);
+            this.lblStatus.Location = new System.Drawing.Point(121, 15);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(112, 15);
             this.lblStatus.TabIndex = 1;
@@ -94,8 +92,12 @@
             // 
             this.btnReload.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.btnReload.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnReload.Location = new System.Drawing.Point(3, 4);
+            this.btnReload.Image = ((System.Drawing.Image)(resources.GetObject("btnReload.Image")));
+            this.btnReload.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnReload.Location = new System.Drawing.Point(3, 7);
+            this.btnReload.Margin = new System.Windows.Forms.Padding(0);
             this.btnReload.Name = "btnReload";
+            this.btnReload.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnReload.Size = new System.Drawing.Size(112, 31);
             this.btnReload.TabIndex = 0;
             this.btnReload.Text = "Reload";
@@ -116,7 +118,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(13, 61);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(554, 567);
+            this.panel2.Size = new System.Drawing.Size(551, 567);
             this.panel2.TabIndex = 4;
             // 
             // progress
@@ -126,7 +128,7 @@
             this.progress.Location = new System.Drawing.Point(0, 0);
             this.progress.MarqueeAnimationSpeed = 10;
             this.progress.Name = "progress";
-            this.progress.Size = new System.Drawing.Size(554, 4);
+            this.progress.Size = new System.Drawing.Size(551, 4);
             this.progress.Step = 40;
             this.progress.TabIndex = 4;
             this.progress.Visible = false;
@@ -141,12 +143,13 @@
             this.Price,
             this.PhoneNumber});
             this.listView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listView.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listView.FullRowSelect = true;
             this.listView.HideSelection = false;
             this.listView.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.listView.Location = new System.Drawing.Point(0, 0);
             this.listView.Name = "listView";
-            this.listView.Size = new System.Drawing.Size(554, 567);
+            this.listView.Size = new System.Drawing.Size(551, 567);
             this.listView.TabIndex = 1;
             this.listView.UseCompatibleStateImageBehavior = false;
             this.listView.View = System.Windows.Forms.View.Details;
@@ -173,31 +176,24 @@
             // PhoneNumber
             // 
             this.PhoneNumber.Text = "Phone Number";
-            this.PhoneNumber.Width = 150;
-            // 
-            // axSkype1
-            // 
-            this.axSkype1.Enabled = true;
-            this.axSkype1.Location = new System.Drawing.Point(347, 12);
-            this.axSkype1.Name = "axSkype1";
-            this.axSkype1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axSkype1.OcxState")));
-            this.axSkype1.Size = new System.Drawing.Size(81, 22);
-            this.axSkype1.TabIndex = 2;
+            this.PhoneNumber.Width = 120;
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(580, 641);
+            this.ClientSize = new System.Drawing.Size(577, 641);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MinimumSize = new System.Drawing.Size(593, 680);
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Marketplaats";
+            this.Load += new System.EventHandler(this.frmMain_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.axSkype1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -216,6 +212,6 @@
         private System.Windows.Forms.ColumnHeader Build;
         private System.Windows.Forms.ColumnHeader Price;
         private System.Windows.Forms.ColumnHeader PhoneNumber;
-        private AxSKYPE4COMLib.AxSkype axSkype1;
+ 
     }
 }

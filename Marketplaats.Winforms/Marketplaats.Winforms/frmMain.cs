@@ -17,10 +17,8 @@ namespace Marketplaats.Winforms
         public frmMain()
         {
             InitializeComponent();
-
-
-
             lblStatus.Text = "";
+            
         }
 
         private  void btnFetch_Click(object sender, EventArgs e)
@@ -58,7 +56,56 @@ namespace Marketplaats.Winforms
             List<Advertishments> ads = new List<Advertishments>()
             {
                 new Advertishments() { Type_="SUV",Build="2016",Price =10000.00,PhoneNumber="09987900777" },
+                new Advertishments() { Type_="SUV",Build="2016",Price =10000.00,PhoneNumber="09987900777" },
+                new Advertishments() { Type_="SUV",Build="2016",Price =10000.00,PhoneNumber="09987900777" },
+                new Advertishments() { Type_="SUV",Build="2016",Price =10000.00,PhoneNumber="09987900777" },
+                new Advertishments() { Type_="SUV",Build="2016",Price =10000.00,PhoneNumber="09987900777" },
+                new Advertishments() { Type_="SUV",Build="2016",Price =10000.00,PhoneNumber="09987900777" },
+                new Advertishments() { Type_="SUV",Build="2016",Price =10000.00,PhoneNumber="09987900777" },
+                new Advertishments() { Type_="SUV",Build="2016",Price =10000.00,PhoneNumber="09987900777" },
+                new Advertishments() { Type_="SUV",Build="2016",Price =10000.00,PhoneNumber="09987900777" },
+                new Advertishments() { Type_="SUV",Build="2016",Price =10000.00,PhoneNumber="09987900777" },
+                new Advertishments() { Type_="SUV",Build="2016",Price =10000.00,PhoneNumber="09987900777" },
+                new Advertishments() { Type_="SUV",Build="2016",Price =10000.00,PhoneNumber="09987900777" },
+                new Advertishments() { Type_="SUV",Build="2016",Price =10000.00,PhoneNumber="09987900777" },
+                new Advertishments() { Type_="SUV",Build="2016",Price =10000.00,PhoneNumber="09987900777" },
+                new Advertishments() { Type_="SUV",Build="2016",Price =10000.00,PhoneNumber="09987900777" },
+                new Advertishments() { Type_="SUV",Build="2016",Price =10000.00,PhoneNumber="09987900777" },
+                new Advertishments() { Type_="SUV",Build="2016",Price =10000.00,PhoneNumber="09987900777" },
+                new Advertishments() { Type_="SUV",Build="2016",Price =10000.00,PhoneNumber="09987900777" },
+                new Advertishments() { Type_="SUV",Build="2016",Price =10000.00,PhoneNumber="09987900777" },
+                new Advertishments() { Type_="SUV",Build="2016",Price =10000.00,PhoneNumber="09987900777" },
+                new Advertishments() { Type_="SUV",Build="2016",Price =10000.00,PhoneNumber="09987900777" },
+                new Advertishments() { Type_="SUV",Build="2016",Price =10000.00,PhoneNumber="09987900777" },
+                new Advertishments() { Type_="SUV",Build="2016",Price =10000.00,PhoneNumber="09987900777" },
+                new Advertishments() { Type_="SUV",Build="2016",Price =10000.00,PhoneNumber="09987900777" },
+                new Advertishments() { Type_="SUV",Build="2016",Price =10000.00,PhoneNumber="09987900777" },
+                new Advertishments() { Type_="SUV",Build="2016",Price =10000.00,PhoneNumber="09987900777" },
+                new Advertishments() { Type_="SUV",Build="2016",Price =10000.00,PhoneNumber="09987900777" },
+                new Advertishments() { Type_="SUV",Build="2016",Price =10000.00,PhoneNumber="09987900777" },
+                new Advertishments() { Type_="SUV",Build="2016",Price =10000.00,PhoneNumber="09987900777" },
+                new Advertishments() { Type_="SUV",Build="2016",Price =10000.00,PhoneNumber="09987900777" },
+                new Advertishments() { Type_="SUV",Build="2016",Price =10000.00,PhoneNumber="09987900777" },
+                new Advertishments() { Type_="SUV",Build="2016",Price =10000.00,PhoneNumber="09987900777" },
+                new Advertishments() { Type_="SUV",Build="2016",Price =10000.00,PhoneNumber="09987900777" },
+                new Advertishments() { Type_="SUV",Build="2016",Price =10000.00,PhoneNumber="09987900777" },
+                new Advertishments() { Type_="SUV",Build="2016",Price =10000.00,PhoneNumber="09987900777" },
+                new Advertishments() { Type_="SUV",Build="2016",Price =10000.00,PhoneNumber="09987900777" },
+                new Advertishments() { Type_="SUV",Build="2016",Price =10000.00,PhoneNumber="09987900777" },
+                new Advertishments() { Type_="SUV",Build="2016",Price =10000.00,PhoneNumber="09987900777" },
+                new Advertishments() { Type_="SUV",Build="2016",Price =10000.00,PhoneNumber="09987900777" },
+                new Advertishments() { Type_="SUV",Build="2016",Price =10000.00,PhoneNumber="09987900777" },
+                new Advertishments() { Type_="SUV",Build="2016",Price =10000.00,PhoneNumber="09987900777" },
+                new Advertishments() { Type_="SUV",Build="2016",Price =10000.00,PhoneNumber="09987900777" },
+
+                new Advertishments() { Type_="SUV",Build="2016",Price =10000.00,PhoneNumber="09987900777" },
+                new Advertishments() { Type_="SUV",Build="2016",Price =10000.00,PhoneNumber="09987900777" },
+                new Advertishments() { Type_="SUV",Build="2016",Price =10000.00,PhoneNumber="09987900777" },
+                new Advertishments() { Type_="SUV",Build="2016",Price =10000.00,PhoneNumber="09987900777" },
+                new Advertishments() { Type_="SUV",Build="2016",Price =10000.00,PhoneNumber="09987900777" },
+                new Advertishments() { Type_="SUV",Build="2016",Price =10000.00,PhoneNumber="09987900777" },
                 new Advertishments() { Type_="SEDAN",Build="2016",Price =20000.00,PhoneNumber="09987900617" }
+
             };
 
             foreach (var ad in ads)
@@ -98,24 +145,24 @@ namespace Marketplaats.Winforms
             progress.Style = ProgressBarStyle.Continuous;
         }
 
-        protected override void WndProc(ref Message message)
-        {
-            const int WM_PAINT = 0xf;
+        //protected override void WndProc(ref Message message)
+        //{
+        //    const int WM_PAINT = 0xf;
 
-            // if the control is in details view mode and columns
-            // have been added, then intercept the WM_PAINT message
-            // and reset the last column width to fill the list view
-            switch (message.Msg)
-            {
-                case WM_PAINT:
-                    if (listView.View == View.Details && listView.Columns.Count > 0)
-                        listView.Columns[listView.Columns.Count - 1].Width = -2;
-                    break;
-            }
+        //    // if the control is in details view mode and columns
+        //    // have been added, then intercept the WM_PAINT message
+        //    // and reset the last column width to fill the list view
+        //    switch (message.Msg)
+        //    {
+        //        case WM_PAINT:
+        //            if (listView.View == View.Details && listView.Columns.Count > 0)
+        //                listView.Columns[listView.Columns.Count - 1].Width = -2;
+        //            break;
+        //    }
 
-            // pass messages on to the base control for processing
-            base.WndProc(ref message);
-        }
+        //    // pass messages on to the base control for processing
+        //    base.WndProc(ref message);
+        //}
 
         private void listView_MouseMove(object sender, MouseEventArgs e)
         {
@@ -133,6 +180,11 @@ namespace Marketplaats.Winforms
                 MessageBox.Show("Do you want to call this seller using Skype","Skype Call",MessageBoxButtons.YesNo,MessageBoxIcon.Question);
                 // etc..
             }
+        }
+
+        private void frmMain_Load(object sender, EventArgs e)
+        {
+            Fetch();
         }
     }
 }
