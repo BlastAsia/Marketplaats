@@ -289,6 +289,7 @@
             this.gridView1.OptionsView.EnableAppearanceEvenRow = true;
             this.gridView1.OptionsView.EnableAppearanceOddRow = true;
             this.gridView1.OptionsView.ShowGroupPanel = false;
+            this.gridView1.CustomColumnDisplayText += new DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventHandler(this.gridView1_CustomColumnDisplayText);
             // 
             // Type_
             // 
@@ -322,6 +323,8 @@
             this.Price.AppearanceHeader.ForeColor = System.Drawing.Color.Black;
             this.Price.AppearanceHeader.Options.UseForeColor = true;
             this.Price.Caption = "Price";
+            this.Price.DisplayFormat.FormatString = "c2";
+            this.Price.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.Price.FieldName = "Price";
             this.Price.Name = "Price";
             this.Price.OptionsColumn.AllowEdit = false;
