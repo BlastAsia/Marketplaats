@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
@@ -9,7 +10,7 @@ using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Columns;
 using Marketplaats.Winforms.Model;
 using Marketplaats.Winforms.Services;
-
+using static Marketplaats.Winforms.Properties.Settings;
 
 namespace Marketplaats.Winforms
 {
@@ -44,15 +45,41 @@ namespace Marketplaats.Winforms
         private void MakeResquest()
         {
             Thread.Sleep(1000);
-            
+
             RestSharpService restSharp = new RestSharpService();
-            if (restSharp.Authentication())
+            try
             {
-                BoxUser user =  restSharp.GetBoxUser(restSharp.AccessToken);
-                MessageBox.Show($"{user.name} {user.login}");
+              //TODO: Testing of expire tokens
+             //throw new Exception("Expire Token");
+
+                // If no token yet
+                if (string.IsNullOrEmpty(Default.AccessToken))
+                {
+                    if (restSharp.Authentication())
+                    {
+                        BoxUser user = restSharp.GetBoxUser(restSharp.AccessToken.access_token);
+                        MessageBox.Show($"{user.name} {user.login}");
+                    }
+                }
+                else
+                {
+                        BoxUser user = restSharp.GetBoxUser(Default.AccessToken);
+                        MessageBox.Show($"{user.name} {user.login}");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                if (ex.Message == "Expire Token")
+                {
+                    restSharp.RefreshToken();
+                    MakeResquest();
+                }
             }
 
         }
+
+ 
 
         private void DisplayToListView()
         { 

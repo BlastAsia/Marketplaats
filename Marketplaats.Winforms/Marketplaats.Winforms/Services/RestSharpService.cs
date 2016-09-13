@@ -18,9 +18,18 @@ namespace Marketplaats.Winforms.Services
         private  string _clientId = Default.ClientID;
         private  string _clientSecret = Default.ClientSecret;
         private  string _redirectUri = Default.RedirectUri;
+        private string _accessToken = Default.AccessToken;
+        private string _refreshToken = Default.RefreshToken;
+
         RestRequest _request;
+
         RestClient _restClient;
 
+
+        public RestSharpService()
+        {
+            AccessToken = new AccessToken();
+        }
 
         public bool Authentication()
         {
@@ -51,24 +60,13 @@ namespace Marketplaats.Winforms.Services
                 {
                     break;
                 }
-                
-                
-                if (GetAccessToken( authorizationCode, _restClient)) break;
 
 
-#if USE_REFRESH_TOKEN
-                
-                // Refresh the access token (should be done if the 1 hour passed since the last access token has been obtained)
-                //
-                // Please not, the step refresh would fail in case the 1 hour has not passed
-                // That is why the code has been cut using the preprocessor
-
-                if (RefreshToken(ref accessToken, client)) break;
-#endif
-
-
-
-
+                if (GetAccessToken(authorizationCode, _restClient))
+                {
+                   
+                    break;
+                }
 
 
                 result = true;
@@ -83,7 +81,7 @@ namespace Marketplaats.Winforms.Services
         /// </summary>
         /// <param name="accessToken"></param>
         /// <returns></returns>
-        public BoxUser GetBoxUser(AccessToken accessToken)
+        public BoxUser GetBoxUser(string token)
         {
             var baseUrl = "https://api.box.com";
 
@@ -91,7 +89,7 @@ namespace Marketplaats.Winforms.Services
 
             _request = new RestRequest(string.Format("/{0}/users/me", _version), Method.GET);
 
-            _request.AddParameter("Authorization",string.Format("Bearer {0}", accessToken.access_token), ParameterType.HttpHeader);
+            _request.AddParameter("Authorization",string.Format("Bearer {0}", token), ParameterType.HttpHeader);
 
             var responseAccountInfo = _restClient.Execute<BoxUser>(_request);
 
@@ -104,36 +102,41 @@ namespace Marketplaats.Winforms.Services
             
         }
 
-        private  bool RefreshToken(RestClient client)
+        /// <summary>
+        // Refresh the access token (should be done if the 1 hour passed since the last access token has been obtained)
+        //
+        // Please note, the step refresh would fail in case the 1 hour has not passed
+        // That is why the code has been cut using the preprocessor
+        /// </summary>
+        /// <param name="client"></param>
+        /// <returns></returns>
+        public bool RefreshToken()
         {
-            
-           var request = new RestRequest("/api/oauth2/token", Method.POST);
+            var baseUrl = "https://api.box.com";
+
+            _restClient = new RestClient(baseUrl);
+
+            var request = new RestRequest("/api/oauth2/token", Method.POST);
 
             request.AddParameter("grant_type", "refresh_token");
-            request.AddParameter("code", AccessToken.access_token);
-            request.AddParameter("client_id", _clientId);
-            request.AddParameter("client_secret", _clientSecret);
-            request.AddParameter("refresh_token", AccessToken.refresh_token);
+            request.AddParameter("code",Default.AccessToken);
+            request.AddParameter("client_id", Default.ClientID);
+            request.AddParameter("client_secret", Default.ClientSecret);
+            request.AddParameter("refresh_token", Default.RefreshToken);
 
-            var response = client.Execute<AccessToken>(request);
+            var response = _restClient.Execute<AccessToken>(request);
 
-            if (response.StatusCode != System.Net.HttpStatusCode.OK)
+            if (response.ResponseStatus == ResponseStatus.Error)
             {
-                return true;
+                return false;
             }
-
-
-
+            
             AccessToken = response.Data;
 
-
-            if (string.IsNullOrEmpty(AccessToken.access_token) ||
-                string.IsNullOrEmpty(AccessToken.refresh_token) ||
-                (0 == AccessToken.expires_in))
-            {
-                return true;
-            }
-            return false;
+            Default.AccessToken = AccessToken.access_token;
+            Default.RefreshToken = AccessToken.refresh_token;
+            Default.Save();
+            return true;
         }
 
         private bool GetAccessToken( string authorizationCode, RestClient client)
@@ -151,25 +154,32 @@ namespace Marketplaats.Winforms.Services
             if (response.StatusCode != System.Net.HttpStatusCode.OK)
             {
                 
-                return true;
+                return false;
             }
 
 
             AccessToken = response.Data;
 
 
-            if (string.IsNullOrEmpty(AccessToken.access_token) ||
-                string.IsNullOrEmpty(AccessToken.refresh_token) ||
-                (0 == AccessToken.expires_in))
+            if (string.IsNullOrEmpty(AccessToken.access_token) || string.IsNullOrEmpty(AccessToken.refresh_token) || (0 == AccessToken.expires_in))
             {
-                return true;
+                return false;
             }
-            return false;
+
+            Default.AccessToken = AccessToken.access_token;
+            Default.RefreshToken = AccessToken.refresh_token;
+            Default.Save();
+
+            return true;
         }
 
+        /// <summary>
+        /// // Set up a local HTTP server to accept authetization callback
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
         private string SetupHTTPServer(string url)
         {
-// Set up a local HTTP server to accept authetization callback
             string auth_code = null;
             var resetEvent = new ManualResetEvent(false);
             using (var svr = SimpleServer.Create(_redirectUri, context =>
