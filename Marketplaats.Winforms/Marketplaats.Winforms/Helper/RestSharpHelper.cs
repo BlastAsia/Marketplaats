@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using RestSharp;
 
-namespace Marketplaats.Winforms
+namespace Marketplaats.Winforms.Helper
 {
     public class RestSharpHelper
     {

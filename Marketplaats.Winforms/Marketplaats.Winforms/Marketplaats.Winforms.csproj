@@ -63,21 +63,17 @@
     <Compile Include="frmMainDev.Designer.cs">
       <DependentUpon>frmMainDev.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmMain.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmMain.Designer.cs">
-      <DependentUpon>frmMain.cs</DependentUpon>
-    </Compile>
+    <Compile Include="Helper\Extensions.cs" />
+    <Compile Include="Helper\Handlers.cs" />
+    <Compile Include="Helper\SimpleServer.cs" />
+    <Compile Include="Model\AccessToken.cs" />
+    <Compile Include="Model\BoxUser.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RestSharpHelper.cs" />
-    <Compile Include="SkypeServices.cs" />
+    <Compile Include="Helper\RestSharpHelper.cs" />
+    <Compile Include="Services\RestSharpService.cs" />
     <EmbeddedResource Include="frmMainDev.resx">
       <DependentUpon>frmMainDev.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmMain.resx">
-      <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -102,17 +98,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <COMReference Include="SKYPE4COMLib">
-      <Guid>{03282B5D-B38F-469D-849A-09B0A7F4881B}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="img\car.png" />

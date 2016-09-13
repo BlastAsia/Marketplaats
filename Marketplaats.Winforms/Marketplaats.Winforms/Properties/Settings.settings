@@ -1,7 +1,30 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Marketplaats.Winforms.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="ClientID" Type="System.String" Scope="User">
+      <Value Profile="(Default)">snvz4rnw0p3sic1b9b19jujs45r1d750</Value>
+    </Setting>
+    <Setting Name="ClientSecret" Type="System.String" Scope="User">
+      <Value Profile="(Default)">tp9YYDNPlFyTLRTE6FDuG97tYIATrVhJ</Value>
+    </Setting>
+    <Setting Name="RedirectUri" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:4125/ConsoleApplication1/authorize/</Value>
+    </Setting>
+    <Setting Name="AccessToken" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="RefreshToken" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ExpiresIn" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="BaseUrl" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://www.box.com</Value>
+    </Setting>
+    <Setting Name="EndPoint_AccessToken" Type="System.String" Scope="User">
+      <Value Profile="(Default)">/api/oauth2/token</Value>
+    </Setting>
+  </Settings>
 </SettingsFile>

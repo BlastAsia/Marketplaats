@@ -322,6 +322,8 @@
             // 
             this.Price.AppearanceHeader.ForeColor = System.Drawing.Color.Black;
             this.Price.AppearanceHeader.Options.UseForeColor = true;
+            this.Price.AppearanceHeader.Options.UseTextOptions = true;
+            this.Price.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.Price.Caption = "Price";
             this.Price.DisplayFormat.FormatString = "c2";
             this.Price.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;

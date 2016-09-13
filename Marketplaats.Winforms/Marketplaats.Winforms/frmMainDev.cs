@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Columns;
+using Marketplaats.Winforms.Model;
+using Marketplaats.Winforms.Services;
 
 
 namespace Marketplaats.Winforms
@@ -42,12 +44,19 @@ namespace Marketplaats.Winforms
         private void MakeResquest()
         {
             Thread.Sleep(1000);
+            
+            RestSharpService restSharp = new RestSharpService();
+            if (restSharp.Authentication())
+            {
+                BoxUser user =  restSharp.GetBoxUser(restSharp.AccessToken);
+                MessageBox.Show($"{user.name} {user.login}");
+            }
+
         }
 
         private void DisplayToListView()
         { 
             var cultureInfo = CultureInfo.GetCultureInfo("da-DK");
-            int i = 1;
             
             List<Advertishments> ads = new List<Advertishments>()
             {
