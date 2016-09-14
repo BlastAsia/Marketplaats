@@ -13,16 +13,12 @@ namespace Marketplaats.Winforms.Services
 
         public AccessToken AccessToken; 
         
-
         private  string _version = "2.0";
         private  string _clientId = Default.ClientID;
         private  string _clientSecret = Default.ClientSecret;
         private  string _redirectUri = Default.RedirectUri;
-        private string _accessToken = Default.AccessToken;
-        private string _refreshToken = Default.RefreshToken;
 
         RestRequest _request;
-
         RestClient _restClient;
 
 
@@ -43,7 +39,8 @@ namespace Marketplaats.Winforms.Services
 
                 _restClient = new RestClient(baseUrl);
 
-                _request = new RestRequest($"/api/oauth2/authorize?response_type=code&client_id={_clientId}&state=authenticated&redirect_uri={_redirectUri}", Method.POST);
+                _request = new RestRequest($"/api/oauth2/authorize?response_type=code&client_id={_clientId}" +
+                                           $"&state=authenticated&redirect_uri={_redirectUri}", Method.POST);
 
                 bool bHasUserGrantedAccess = false;
 
@@ -114,7 +111,6 @@ namespace Marketplaats.Winforms.Services
 
         /// <summary>
         // Refresh the access token (should be done if the 1 hour passed since the last access token has been obtained)
-        //
         // Please note, the step refresh would fail in case the 1 hour has not passed
         // That is why the code has been cut using the preprocessor
         /// </summary>

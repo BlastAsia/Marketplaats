@@ -31,9 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMainDev));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
+            this.lblStatus = new DevExpress.XtraEditors.LabelControl();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.lblStatus = new System.Windows.Forms.Label();
             this.btnReload = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -76,10 +75,9 @@
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.White;
-            this.panel1.Controls.Add(this.webBrowser1);
-            this.panel1.Controls.Add(this.pictureBox1);
+            this.panel1.BackColor = System.Drawing.Color.Transparent;
             this.panel1.Controls.Add(this.lblStatus);
+            this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.btnReload);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(10, 10);
@@ -88,16 +86,14 @@
             this.panel1.Size = new System.Drawing.Size(557, 81);
             this.panel1.TabIndex = 2;
             // 
-            // webBrowser1
+            // lblStatus
             // 
-            this.webBrowser1.IsWebBrowserContextMenuEnabled = false;
-            this.webBrowser1.Location = new System.Drawing.Point(363, 23);
-            this.webBrowser1.Margin = new System.Windows.Forms.Padding(0);
-            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
-            this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.ScrollBarsEnabled = false;
-            this.webBrowser1.Size = new System.Drawing.Size(72, 31);
-            this.webBrowser1.TabIndex = 3;
+            this.lblStatus.Appearance.Font = new System.Drawing.Font("Tahoma", 9F);
+            this.lblStatus.Location = new System.Drawing.Point(131, 32);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(87, 14);
+            this.lblStatus.TabIndex = 3;
+            this.lblStatus.Text = "Last reload time";
             // 
             // pictureBox1
             // 
@@ -109,18 +105,6 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
-            // 
-            // lblStatus
-            // 
-            this.lblStatus.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lblStatus.AutoSize = true;
-            this.lblStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStatus.ForeColor = System.Drawing.Color.Black;
-            this.lblStatus.Location = new System.Drawing.Point(121, 31);
-            this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(112, 15);
-            this.lblStatus.TabIndex = 1;
-            this.lblStatus.Text = "Last load 10:30 AM";
             // 
             // btnReload
             // 
@@ -282,13 +266,13 @@
             this.Build,
             this.Price,
             this.PhoneNumber});
-            this.gridView1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
             this.gridView1.GridControl = this.grd;
             this.gridView1.Name = "gridView1";
-            this.gridView1.OptionsSelection.EnableAppearanceFocusedCell = false;
             this.gridView1.OptionsView.EnableAppearanceEvenRow = true;
             this.gridView1.OptionsView.EnableAppearanceOddRow = true;
-            this.gridView1.OptionsView.ShowGroupPanel = false;
+            this.gridView1.OptionsView.ShowFilterPanelMode = DevExpress.XtraGrid.Views.Base.ShowFilterPanelMode.ShowAlways;
+            this.gridView1.OptionsView.ShowGroupedColumns = true;
+            this.gridView1.PaintStyleName = "Skin";
             this.gridView1.CustomColumnDisplayText += new DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventHandler(this.gridView1_CustomColumnDisplayText);
             // 
             // Type_
@@ -355,7 +339,13 @@
             // 
             // repositoryItemHyperLinkEdit1
             // 
+            this.repositoryItemHyperLinkEdit1.Appearance.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.repositoryItemHyperLinkEdit1.Appearance.Options.UseForeColor = true;
+            this.repositoryItemHyperLinkEdit1.AppearanceFocused.ForeColor = System.Drawing.Color.White;
+            this.repositoryItemHyperLinkEdit1.AppearanceFocused.Options.UseForeColor = true;
             this.repositoryItemHyperLinkEdit1.AutoHeight = false;
+            this.repositoryItemHyperLinkEdit1.Image = ((System.Drawing.Image)(resources.GetObject("repositoryItemHyperLinkEdit1.Image")));
+            this.repositoryItemHyperLinkEdit1.ImageAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.repositoryItemHyperLinkEdit1.Name = "repositoryItemHyperLinkEdit1";
             this.repositoryItemHyperLinkEdit1.Click += new System.EventHandler(this.repositoryItemHyperLinkEdit1_Click);
             // 
@@ -375,11 +365,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(577, 641);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(593, 680);
+            this.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.Flat;
+            this.MinimumSize = new System.Drawing.Size(587, 673);
             this.Name = "frmMainDev";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Marktplaats";
@@ -411,8 +401,7 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit repositoryItemHyperLinkEdit1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label lblStatus;
         private System.Windows.Forms.Button btnReload;
-        private System.Windows.Forms.WebBrowser webBrowser1;
+        private DevExpress.XtraEditors.LabelControl lblStatus;
     }
 }

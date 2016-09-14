@@ -6,6 +6,7 @@ using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Columns;
 using Marketplaats.Winforms.Model;
@@ -14,7 +15,7 @@ using static Marketplaats.Winforms.Properties.Settings;
 
 namespace Marketplaats.Winforms
 {
-    public partial class frmMainDev : Form
+    public partial class frmMainDev : XtraForm
     {
         public frmMainDev()
         {
