@@ -302,6 +302,7 @@
             this.Build.Name = "Build";
             this.Build.OptionsColumn.AllowEdit = false;
             this.Build.OptionsFilter.FilterPopupMode = DevExpress.XtraGrid.Columns.FilterPopupMode.CheckedList;
+            this.Build.UnboundType = DevExpress.Data.UnboundColumnType.String;
             this.Build.Visible = true;
             this.Build.VisibleIndex = 1;
             // 
@@ -320,7 +321,7 @@
             this.Price.Name = "Price";
             this.Price.OptionsColumn.AllowEdit = false;
             this.Price.OptionsFilter.FilterPopupMode = DevExpress.XtraGrid.Columns.FilterPopupMode.CheckedList;
-            this.Price.UnboundType = DevExpress.Data.UnboundColumnType.Decimal;
+            this.Price.UnboundType = DevExpress.Data.UnboundColumnType.String;
             this.Price.Visible = true;
             this.Price.VisibleIndex = 2;
             // 

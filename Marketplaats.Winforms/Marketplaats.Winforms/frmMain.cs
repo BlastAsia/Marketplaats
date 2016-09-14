@@ -13,6 +13,7 @@ using Marketplaats.Winforms.Helper;
 using Marketplaats.Winforms.Model;
 using Marketplaats.Winforms.Services;
 using static Marketplaats.Winforms.Properties.Settings;
+using System.Reflection;
 
 namespace Marketplaats.Winforms
 {
@@ -21,7 +22,11 @@ namespace Marketplaats.Winforms
         public frmMain()
         {
             InitializeComponent();
+
+            Version version = Assembly.GetExecutingAssembly().GetName().Version;
+            Text = Text + " v" + version.Major + "." + version.Minor;
             lblStatus.Text = "";
+
         }
         
         private  void btnFetch_Click(object sender, EventArgs e)
@@ -94,24 +99,24 @@ namespace Marketplaats.Winforms
                 new Advertishments() { Type_="Hatchback",Build="2012",Price =189.00,PhoneNumber="06-62962395".ToSkypeFormat() },
                 new Advertishments() { Type_="Hatchback",Build="2012",Price =170.00,PhoneNumber="06-64002124".ToSkypeFormat() },
                 new Advertishments() { Type_="Hatchback",Build="2011",Price =110.00,PhoneNumber="06-53021733".ToSkypeFormat() },
-                new Advertishments() { Type_="Hatchback",Build="2010",Price ="Ask",PhoneNumber="06-83336206".ToSkypeFormat() },
+                new Advertishments() { Type_="Hatchback",Build="2010",Price =98,PhoneNumber="06-83336206".ToSkypeFormat() },
 
                 new Advertishments() { Type_="Sedan",Build="2014",Price =210.00,PhoneNumber="06-42681333".ToSkypeFormat() },
                 new Advertishments() { Type_="Sedan",Build="2013",Price =190.00,PhoneNumber="06-82015867".ToSkypeFormat() },
                 new Advertishments() { Type_="Sedan",Build="2012",Price =159.00,PhoneNumber="06-43052640".ToSkypeFormat() },
                 new Advertishments() { Type_="Sedan",Build="2011",Price =110.00,PhoneNumber="06-31340367".ToSkypeFormat() },
-                new Advertishments() { Type_="Sedan",Build="2010",Price ="Ask",PhoneNumber= "06-31340367".ToSkypeFormat() },
+                new Advertishments() { Type_="Sedan",Build="2010",Price =90,PhoneNumber= "06-31340367".ToSkypeFormat() },
 
                 new Advertishments() { Type_="SUV",Build="2014",Price =299.00,PhoneNumber= "06-31340367".ToSkypeFormat() },
                 new Advertishments() { Type_="SUV",Build="2013",Price =198.00,PhoneNumber= "06-31340367".ToSkypeFormat() },
                 new Advertishments() { Type_="SUV",Build="2015",Price =300.00,PhoneNumber= "06-31340367".ToSkypeFormat() },
-                new Advertishments() { Type_="SUV",Build="2009",Price ="Ask",PhoneNumber= "06-57325659".ToSkypeFormat() },
-                new Advertishments() { Type_="SUV",Build="2008",Price ="Ask",PhoneNumber= "06-31340367".ToSkypeFormat() },
+                new Advertishments() { Type_="SUV",Build="2009",Price =290,PhoneNumber= "06-57325659".ToSkypeFormat() },
+                new Advertishments() { Type_="SUV",Build="2008",Price =240,PhoneNumber= "06-31340367".ToSkypeFormat() },
 
                 new Advertishments() { Type_="stationwagon",Build="2010",Price =10000.00,PhoneNumber= "06-56736840".ToSkypeFormat() },
                 new Advertishments() { Type_="stationwagon",Build="2008",Price =3000.00,PhoneNumber= "06-56736840".ToSkypeFormat() },
                 new Advertishments() { Type_="stationwagon",Build="2015",Price =20000.00,PhoneNumber= "06-56736840".ToSkypeFormat() },
-                new Advertishments() { Type_="stationwagon",Build="2009",Price ="See Description",PhoneNumber= "06-38809780".ToSkypeFormat() },
+                new Advertishments() { Type_="stationwagon",Build="2009",Price =290,PhoneNumber= "06-38809780".ToSkypeFormat() },
 
                 new Advertishments() { Type_="cabriolet",Build="2000",Price =2940.00,PhoneNumber= "06-56736840".ToSkypeFormat() },
                 new Advertishments() { Type_="cabriolet",Build="2001",Price =9400,PhoneNumber= "06-56736840".ToSkypeFormat() },
