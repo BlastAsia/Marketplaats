@@ -83,23 +83,33 @@ namespace Marketplaats.Winforms.Services
         /// <returns></returns>
         public BoxUser GetBoxUser(string token)
         {
-            var baseUrl = "https://api.box.com";
-
-            _restClient = new RestClient(baseUrl);
-
-            _request = new RestRequest(string.Format("/{0}/users/me", _version), Method.GET);
-
-            _request.AddParameter("Authorization",string.Format("Bearer {0}", token), ParameterType.HttpHeader);
-
-            var responseAccountInfo = _restClient.Execute<BoxUser>(_request);
-
-            if (responseAccountInfo.StatusCode != System.Net.HttpStatusCode.OK)
+            try
             {
-                return null;
+
+            
+                var baseUrl = "https://api.box.com";
+
+                _restClient = new RestClient(baseUrl);
+
+                _request = new RestRequest(string.Format("/{0}/users/me", _version), Method.GET);
+
+                _request.AddParameter("Authorization",string.Format("Bearer {0}", token), ParameterType.HttpHeader);
+
+                var responseAccountInfo = _restClient.Execute<BoxUser>(_request);
+
+                if (responseAccountInfo.StatusCode != System.Net.HttpStatusCode.OK)
+                {
+                    throw new Exception(responseAccountInfo.StatusCode.ToString());
+                }
+
+                return responseAccountInfo.Data;
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
 
-            return responseAccountInfo.Data;
-            
         }
 
         /// <summary>
@@ -116,13 +126,14 @@ namespace Marketplaats.Winforms.Services
 
             _restClient = new RestClient(baseUrl);
 
-            var request = new RestRequest("/api/oauth2/token", Method.POST);
+            var request = new RestRequest("/oauth2/token", Method.POST);
 
             request.AddParameter("grant_type", "refresh_token");
-            request.AddParameter("code",Default.AccessToken);
+            request.AddParameter("refresh_token", Default.RefreshToken);
+            //request.AddParameter("code",Default.AccessToken);
             request.AddParameter("client_id", Default.ClientID);
             request.AddParameter("client_secret", Default.ClientSecret);
-            request.AddParameter("refresh_token", Default.RefreshToken);
+            
 
             var response = _restClient.Execute<AccessToken>(request);
 
@@ -139,7 +150,7 @@ namespace Marketplaats.Winforms.Services
             return true;
         }
 
-        private bool GetAccessToken( string authorizationCode, RestClient client)
+        private bool GetAccessToken(string authorizationCode, RestClient client)
         {
             // Get Access Token
             var request = new RestRequest("/api/oauth2/token", Method.POST);

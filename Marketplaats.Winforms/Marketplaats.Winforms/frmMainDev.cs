@@ -70,7 +70,7 @@ namespace Marketplaats.Winforms
             }
             catch (Exception ex)
             {
-                if (ex.Message == "Expire Token")
+                if (ex.Message == "Unauthorized")
                 {
                     restSharp.RefreshToken();
                     MakeResquest();
