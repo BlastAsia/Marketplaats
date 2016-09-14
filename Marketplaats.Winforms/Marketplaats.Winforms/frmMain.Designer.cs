@@ -1,6 +1,6 @@
 ﻿namespace Marketplaats.Winforms
 {
-    partial class frmMainDev
+    partial class frmMain
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMainDev));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblStatus = new DevExpress.XtraEditors.LabelControl();
@@ -297,17 +297,18 @@
             // 
             this.Build.AppearanceHeader.ForeColor = System.Drawing.Color.Black;
             this.Build.AppearanceHeader.Options.UseForeColor = true;
-            this.Build.Caption = "Build";
+            this.Build.Caption = "Built";
             this.Build.FieldName = "Build";
             this.Build.Name = "Build";
             this.Build.OptionsColumn.AllowEdit = false;
             this.Build.OptionsFilter.FilterPopupMode = DevExpress.XtraGrid.Columns.FilterPopupMode.CheckedList;
-            this.Build.UnboundType = DevExpress.Data.UnboundColumnType.String;
             this.Build.Visible = true;
             this.Build.VisibleIndex = 1;
             // 
             // Price
             // 
+            this.Price.AppearanceCell.Options.UseTextOptions = true;
+            this.Price.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.Price.AppearanceHeader.ForeColor = System.Drawing.Color.Black;
             this.Price.AppearanceHeader.Options.UseForeColor = true;
             this.Price.AppearanceHeader.Options.UseTextOptions = true;
@@ -365,7 +366,7 @@
             this.progress.TabIndex = 4;
             this.progress.Visible = false;
             // 
-            // frmMainDev
+            // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -374,9 +375,9 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.Flat;
             this.MinimumSize = new System.Drawing.Size(587, 673);
-            this.Name = "frmMainDev";
+            this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Marktplaats";
+            this.Text = "Marktplaats Car Ads";
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);

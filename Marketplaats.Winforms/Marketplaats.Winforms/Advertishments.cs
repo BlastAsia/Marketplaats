@@ -10,7 +10,7 @@ namespace Marketplaats.Winforms
     {
         public string Type_ { get; set; }
         public string Build { get; set; }
-        public double Price { get; set; }
+        public object Price { get; set; }
         public string PhoneNumber { get; set; }
     }
 }

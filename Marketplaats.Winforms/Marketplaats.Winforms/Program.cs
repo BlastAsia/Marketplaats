@@ -27,7 +27,7 @@ namespace Marketplaats.Winforms
 
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
-                Application.Run(new frmMainDev());
+                Application.Run(new frmMain());
             }
 
 
