@@ -76,6 +76,8 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Transparent;
+            this.panel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel1.BackgroundImage")));
+            this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panel1.Controls.Add(this.lblStatus);
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.btnReload);
@@ -89,7 +91,8 @@
             // lblStatus
             // 
             this.lblStatus.Appearance.Font = new System.Drawing.Font("Tahoma", 9F);
-            this.lblStatus.Location = new System.Drawing.Point(131, 32);
+            this.lblStatus.Appearance.ForeColor = System.Drawing.Color.White;
+            this.lblStatus.Location = new System.Drawing.Point(136, 34);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(87, 14);
             this.lblStatus.TabIndex = 3;
@@ -99,7 +102,7 @@
             // 
             this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(486, 6);
+            this.pictureBox1.Location = new System.Drawing.Point(481, 8);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(68, 66);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -112,7 +115,7 @@
             this.btnReload.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnReload.Image = ((System.Drawing.Image)(resources.GetObject("btnReload.Image")));
             this.btnReload.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnReload.Location = new System.Drawing.Point(3, 23);
+            this.btnReload.Location = new System.Drawing.Point(8, 25);
             this.btnReload.Margin = new System.Windows.Forms.Padding(0);
             this.btnReload.Name = "btnReload";
             this.btnReload.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
@@ -134,9 +137,10 @@
             this.panel2.Controls.Add(this.grd);
             this.panel2.Controls.Add(this.progress);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(13, 94);
+            this.panel2.Location = new System.Drawing.Point(10, 91);
+            this.panel2.Margin = new System.Windows.Forms.Padding(0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(551, 534);
+            this.panel2.Size = new System.Drawing.Size(557, 540);
             this.panel2.TabIndex = 4;
             // 
             // grd
@@ -144,11 +148,11 @@
             this.grd.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grd.Location = new System.Drawing.Point(0, 4);
             this.grd.MainView = this.gridView1;
+            this.grd.Margin = new System.Windows.Forms.Padding(0);
             this.grd.Name = "grd";
-            this.grd.Padding = new System.Windows.Forms.Padding(5);
             this.grd.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemHyperLinkEdit1});
-            this.grd.Size = new System.Drawing.Size(551, 530);
+            this.grd.Size = new System.Drawing.Size(557, 536);
             this.grd.TabIndex = 5;
             this.grd.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -356,7 +360,7 @@
             this.progress.Location = new System.Drawing.Point(0, 0);
             this.progress.MarqueeAnimationSpeed = 10;
             this.progress.Name = "progress";
-            this.progress.Size = new System.Drawing.Size(551, 4);
+            this.progress.Size = new System.Drawing.Size(557, 4);
             this.progress.Step = 40;
             this.progress.TabIndex = 4;
             this.progress.Visible = false;
