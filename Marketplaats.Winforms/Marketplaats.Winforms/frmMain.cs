@@ -3,6 +3,8 @@ using System.CodeDom;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
+using System.Linq;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -14,11 +16,17 @@ using Marketplaats.Winforms.Model;
 using Marketplaats.Winforms.Services;
 using static Marketplaats.Winforms.Properties.Settings;
 using System.Reflection;
+using HtmlAgilityPack;
+using HtmlDocument = HtmlAgilityPack.HtmlDocument;
+
 
 namespace Marketplaats.Winforms
 {
     public partial class frmMain : XtraForm
     {
+
+        List<Advertishments> _ads;
+
         public frmMain()
         {
             InitializeComponent();
@@ -37,17 +45,35 @@ namespace Marketplaats.Winforms
         private async void Fetch()
         {
             start_progress();
-           
-
-            // Invoke http resquest
-            await Task.Run(() => MakeResquest());
             
-            // Load data to grid
+
+            //Load and parse
+            HtmlParsersService htmlpack = new HtmlParsersService();
+            _ads =   await Task.Run(() => htmlpack.StartParsing());
+            
+            //Load data to grid
             DisplayToListView();
 
             stop_progress();
             lblStatus.Text = $"Last reload { DateTime.Now.ToShortTimeString()}";
         }
+
+      
+        private void DisplayToListView()
+        {
+
+            
+            gridView1.ClearColumnsFilter();
+            grd.DataSource = _ads;
+
+
+            ColumnView view = grd.MainView as ColumnView;
+            foreach (GridColumn column in view.Columns)
+            {
+                column.OptionsFilter.FilterPopupMode = FilterPopupMode.CheckedList;
+            }
+        }
+
 
         private void MakeResquest()
         {
@@ -56,8 +82,8 @@ namespace Marketplaats.Winforms
             RestSharpService restSharp = new RestSharpService();
             try
             {
-             
-             //throw new Exception("Expire Token");
+
+                //throw new Exception("Expire Token");
 
                 // If no token yet
                 if (string.IsNullOrEmpty(Default.AccessToken))
@@ -70,8 +96,8 @@ namespace Marketplaats.Winforms
                 }
                 else
                 {
-                        BoxUser user = restSharp.GetBoxUser(Default.AccessToken);
-                        //MessageBox.Show($"{user.name} {user.login}");
+                    BoxUser user = restSharp.GetBoxUser(Default.AccessToken);
+                    //MessageBox.Show($"{user.name} {user.login}");
                 }
 
             }
@@ -85,61 +111,6 @@ namespace Marketplaats.Winforms
             }
 
         }
-
- 
-
-        private void DisplayToListView()
-        { 
-            
-            
-            List<Advertishments> ads = new List<Advertishments>()
-            {
-               
-                new Advertishments() { Type_="Hatchback",Build="2013",Price =200.00,PhoneNumber="0597647062".ToSkypeFormat() },
-                new Advertishments() { Type_="Hatchback",Build="2012",Price =189.00,PhoneNumber="06-62962395".ToSkypeFormat() },
-                new Advertishments() { Type_="Hatchback",Build="2012",Price =170.00,PhoneNumber="06-64002124".ToSkypeFormat() },
-                new Advertishments() { Type_="Hatchback",Build="2011",Price =110.00,PhoneNumber="06-53021733".ToSkypeFormat() },
-                new Advertishments() { Type_="Hatchback",Build="2010",Price =98,PhoneNumber="06-83336206".ToSkypeFormat() },
-
-                new Advertishments() { Type_="Sedan",Build="2014",Price =210.00,PhoneNumber="06-42681333".ToSkypeFormat() },
-                new Advertishments() { Type_="Sedan",Build="2013",Price =190.00,PhoneNumber="06-82015867".ToSkypeFormat() },
-                new Advertishments() { Type_="Sedan",Build="2012",Price =159.00,PhoneNumber="06-43052640".ToSkypeFormat() },
-                new Advertishments() { Type_="Sedan",Build="2011",Price =110.00,PhoneNumber="06-31340367".ToSkypeFormat() },
-                new Advertishments() { Type_="Sedan",Build="2010",Price =90,PhoneNumber= "06-31340367".ToSkypeFormat() },
-
-                new Advertishments() { Type_="SUV",Build="2014",Price =299.00,PhoneNumber= "06-31340367".ToSkypeFormat() },
-                new Advertishments() { Type_="SUV",Build="2013",Price =198.00,PhoneNumber= "06-31340367".ToSkypeFormat() },
-                new Advertishments() { Type_="SUV",Build="2015",Price =300.00,PhoneNumber= "06-31340367".ToSkypeFormat() },
-                new Advertishments() { Type_="SUV",Build="2009",Price =290,PhoneNumber= "06-57325659".ToSkypeFormat() },
-                new Advertishments() { Type_="SUV",Build="2008",Price =240,PhoneNumber= "06-31340367".ToSkypeFormat() },
-
-                new Advertishments() { Type_="stationwagon",Build="2010",Price =10000.00,PhoneNumber= "06-56736840".ToSkypeFormat() },
-                new Advertishments() { Type_="stationwagon",Build="2008",Price =3000.00,PhoneNumber= "06-56736840".ToSkypeFormat() },
-                new Advertishments() { Type_="stationwagon",Build="2015",Price =20000.00,PhoneNumber= "06-56736840".ToSkypeFormat() },
-                new Advertishments() { Type_="stationwagon",Build="2009",Price =290,PhoneNumber= "06-38809780".ToSkypeFormat() },
-
-                new Advertishments() { Type_="cabriolet",Build="2000",Price =2940.00,PhoneNumber= "06-56736840".ToSkypeFormat() },
-                new Advertishments() { Type_="cabriolet",Build="2001",Price =9400,PhoneNumber= "06-56736840".ToSkypeFormat() },
-                new Advertishments() { Type_="cabriolet",Build="1994",Price =400,PhoneNumber= "06-56736840".ToSkypeFormat() },
-                new Advertishments() { Type_="cabriolet",Build="2004",Price =8550,PhoneNumber= "06-56736840".ToSkypeFormat() },
-                new Advertishments() { Type_="cabriolet",Build="2011",Price =30950,PhoneNumber= "06-56736840".ToSkypeFormat() },
-
-
-
-
-            };
-
-            gridView1.ClearColumnsFilter();
-            grd.DataSource = ads;
-
-
-            ColumnView view = grd.MainView as ColumnView;
-            foreach (GridColumn column in view.Columns)
-            {
-                column.OptionsFilter.FilterPopupMode = FilterPopupMode.CheckedList;
-            }
-        }
-        
         void  start_progress()
         {
             
@@ -161,7 +132,8 @@ namespace Marketplaats.Winforms
         private void repositoryItemHyperLinkEdit1_Click(object sender, EventArgs e)
         {
             string phoneNumber = gridView1.GetFocusedDisplayText();
-            DialogResult dialogResult = MessageBox.Show("Do you want to call this seller using Skype.", $"Skype call to ({phoneNumber})", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            DialogResult dialogResult = MessageBox.Show("Call this seller using Skype.", $"Skype call to ({phoneNumber})", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if(dialogResult == DialogResult.Yes)
             {

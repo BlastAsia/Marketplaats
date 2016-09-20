@@ -16,23 +16,11 @@ namespace Marketplaats.Winforms
         static void Main()
         {
 
-
-            if (string.IsNullOrEmpty(Default.ClientID) || string.IsNullOrEmpty(Default.ClientSecret))
-            {
-                MessageBox.Show("Client ID and Client Secret are required.", "Marktplaats API", MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-            }
-            else
-            {
-
-                Application.EnableVisualStyles();
-                Application.SetCompatibleTextRenderingDefault(false);
-                Application.Run(new frmMain());
-            }
-
-
-
-            
+        
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new frmMain());
+        
         }
     }
 }

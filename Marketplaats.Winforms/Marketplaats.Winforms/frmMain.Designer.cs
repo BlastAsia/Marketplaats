@@ -44,6 +44,7 @@
             this.PhoneNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemHyperLinkEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit();
             this.progress = new System.Windows.Forms.ProgressBar();
+            this.Link = new DevExpress.XtraGrid.Columns.GridColumn();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -269,7 +270,8 @@
             this.Type_,
             this.Build,
             this.Price,
-            this.PhoneNumber});
+            this.PhoneNumber,
+            this.Link});
             this.gridView1.GridControl = this.grd;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsView.EnableAppearanceEvenRow = true;
@@ -334,7 +336,7 @@
             this.PhoneNumber.AppearanceHeader.Options.UseForeColor = true;
             this.PhoneNumber.AppearanceHeader.Options.UseTextOptions = true;
             this.PhoneNumber.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.PhoneNumber.Caption = "Phone Number";
+            this.PhoneNumber.Caption = "Seller";
             this.PhoneNumber.ColumnEdit = this.repositoryItemHyperLinkEdit1;
             this.PhoneNumber.FieldName = "PhoneNumber";
             this.PhoneNumber.Name = "PhoneNumber";
@@ -366,6 +368,14 @@
             this.progress.Step = 40;
             this.progress.TabIndex = 4;
             this.progress.Visible = false;
+            // 
+            // Link
+            // 
+            this.Link.Caption = "Link";
+            this.Link.FieldName = "Link";
+            this.Link.Name = "Link";
+            this.Link.Visible = true;
+            this.Link.VisibleIndex = 4;
             // 
             // frmMain
             // 
@@ -409,5 +419,6 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button btnReload;
         private DevExpress.XtraEditors.LabelControl lblStatus;
+        private DevExpress.XtraGrid.Columns.GridColumn Link;
     }
 }
