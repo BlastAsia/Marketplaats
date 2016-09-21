@@ -20,6 +20,7 @@ namespace Marketplaats.Winforms
     {
 
         List<Advertishments> _ads;
+        int _timeout = 20000;
 
         public frmMain()
         {
@@ -44,7 +45,18 @@ namespace Marketplaats.Winforms
             
                 //Load and parse
                 HtmlParsersService htmlpack = new HtmlParsersService();
-                _ads =   await Task.Run(() => htmlpack.StartParsing());
+               
+                var task = Task.Run(() => htmlpack.StartParsing());
+
+                if (await Task.WhenAny(task, Task.Delay(_timeout)) == task)
+                {
+                    _ads = task.Result;
+                }
+                else
+                {
+                    throw new Exception("Connection Time-Out");
+                }
+
             
                 //Load data to grid
                 DisplayToListView();
@@ -55,6 +67,7 @@ namespace Marketplaats.Winforms
             }
             catch (Exception ex)
             {
+                stop_progress();
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -62,6 +75,8 @@ namespace Marketplaats.Winforms
       
         private void DisplayToListView()
         {
+
+
             gridView1.ClearColumnsFilter();
             grd.DataSource = _ads;
 
@@ -133,16 +148,26 @@ namespace Marketplaats.Winforms
         {
             try
             {
-
-    
+                
                 Cursor = Cursors.WaitCursor;
 
                 var link = gridView1.GetRowCellValue(gridView1.FocusedRowHandle,"Link").ToString();
 
                 HtmlParsersService htmlpack = new HtmlParsersService();
-            
-                var phoneNumber = await Task.Run(() => htmlpack.GetPhoneNumber(link));
+                
+                string phoneNumber = string.Empty;
 
+                var task = Task.Run(() => htmlpack.GetPhoneNumber(link));
+
+                if (await Task.WhenAny(task, Task.Delay(_timeout)) == task)
+                {
+                    phoneNumber = task.Result;
+                }
+                else
+                {
+                    throw new Exception("Connection Time-Out");
+                }
+                
                 Cursor = Cursors.Default;
 
                 DialogResult dialogResult = MessageBox.Show("Call this seller using Skype.", $"Skype call to ({phoneNumber})", MessageBoxButtons.YesNo, MessageBoxIcon.Question);

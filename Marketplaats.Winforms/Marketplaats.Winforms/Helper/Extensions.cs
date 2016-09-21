@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Text;
 using libphonenumber;
 namespace Marketplaats.Winforms.Helper
@@ -45,6 +46,20 @@ namespace Marketplaats.Winforms.Helper
 
             return strNumber;
 	    }
+
+	    public static double ToDouble(this object value)
+	    {
+	        try
+	        {
+	          return  Convert.ToDouble(value);
+	        }
+	        catch (Exception)
+	        {
+
+	            return 0D;
+	        }
+	    }
+
 
     }
 }

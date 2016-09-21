@@ -47,21 +47,19 @@ namespace Marketplaats.Winforms.Services
                                     .Equals("mp-listing-title"))
                                     .InnerText;
 
-                        var price = Convert.ToDouble(
-                                     child.Descendants()
+                         var price = child.Descendants()
                                     .Single(n => n.GetAttributeValue("class", "")
                                     .Equals("price-new ellipsis"))
                                     .InnerText
                                     .Replace("&euro;&nbsp;", string.Empty).Trim()
-                                    .Replace(".", string.Empty).Replace(",", "."));
+                                    .Replace(".", string.Empty).Replace(",", ".").ToDouble();
 
                         var built = child
                                     .Descendants()
                                     .FirstOrDefault(n => n.GetAttributeValue("class", "")
                                     .Equals("mp-listing-attributes"));
 
-
-
+                    
                         if (built != null)
                         {
                             build = built.InnerText;
@@ -73,31 +71,24 @@ namespace Marketplaats.Winforms.Services
                 }
                 GC.Collect();
             
-                
-          
-
             return ads;
         }
 
         public string GetPhoneNumber(string link)
         {
            
-                
-
-                var html = new HtmlDocument();
-
-
-                html.LoadHtml(new WebClient().DownloadString(link));
-                var section = html.DocumentNode.SelectNodes("//div[@class='phone-link alternative']");
-
-                string number = "";
-                if (section != null)
-                {
-                    number = section.Single().InnerText;
-                }
-
-                return number.ToSkypeFormat();
+            var html = new HtmlDocument();
             
+            html.LoadHtml(new WebClient().DownloadString(link));
+            var section = html.DocumentNode.SelectNodes("//div[@class='phone-link alternative']");
+
+            string number = "";
+            if (section != null)
+            {
+                number = section.Single().InnerText;
+            }
+
+            return number.ToSkypeFormat();
             
         }
 
