@@ -38,25 +38,30 @@ namespace Marketplaats.Winforms
 
         private async void Fetch()
         {
-            start_progress();
+            try
+            {    
+                start_progress();
             
-
-            //Load and parse
-            HtmlParsersService htmlpack = new HtmlParsersService();
-            _ads =   await Task.Run(() => htmlpack.StartParsing());
+                //Load and parse
+                HtmlParsersService htmlpack = new HtmlParsersService();
+                _ads =   await Task.Run(() => htmlpack.StartParsing());
             
-            //Load data to grid
-            DisplayToListView();
+                //Load data to grid
+                DisplayToListView();
 
-            stop_progress();
-            lblStatus.Text = $"Last reload { DateTime.Now.ToShortTimeString()}";
+                stop_progress();
+                lblStatus.Text = $"Last reload { DateTime.Now.ToShortTimeString()}";
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
       
         private void DisplayToListView()
         {
-
-            
             gridView1.ClearColumnsFilter();
             grd.DataSource = _ads;
 
@@ -126,25 +131,34 @@ namespace Marketplaats.Winforms
 
         private async void repositoryItemHyperLinkEdit1_Click(object sender, EventArgs e)
         {
-
-            Cursor = Cursors.WaitCursor;
-
-            var link = gridView1.GetRowCellValue(gridView1.FocusedRowHandle,"Link").ToString();
-
-            HtmlParsersService htmlpack = new HtmlParsersService();
-            
-            var phoneNumber = await Task.Run(() => htmlpack.GetPhoneNumber(link));
-
-            Cursor = Cursors.Default;
-
-            DialogResult dialogResult = MessageBox.Show("Call this seller using Skype.", $"Skype call to ({phoneNumber})", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            if(dialogResult == DialogResult.Yes)
+            try
             {
-                ProcessStartInfo startInfo = new ProcessStartInfo();
-                startInfo.FileName = "skype.exe";
-                startInfo.Arguments = $"/callto:{phoneNumber}";
-                Process.Start(startInfo);
+
+    
+                Cursor = Cursors.WaitCursor;
+
+                var link = gridView1.GetRowCellValue(gridView1.FocusedRowHandle,"Link").ToString();
+
+                HtmlParsersService htmlpack = new HtmlParsersService();
+            
+                var phoneNumber = await Task.Run(() => htmlpack.GetPhoneNumber(link));
+
+                Cursor = Cursors.Default;
+
+                DialogResult dialogResult = MessageBox.Show("Call this seller using Skype.", $"Skype call to ({phoneNumber})", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if(dialogResult == DialogResult.Yes)
+                {
+                    ProcessStartInfo startInfo = new ProcessStartInfo();
+                    startInfo.FileName = "skype.exe";
+                    startInfo.Arguments = $"/callto:{phoneNumber}";
+                    Process.Start(startInfo);
+                }
+            }
+            catch (Exception ex)
+            {
+                Cursor = Cursors.Default;
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -154,14 +168,14 @@ namespace Marketplaats.Winforms
             {
 
             
-            ColumnView view = sender as ColumnView;
-            if (e.Column.FieldName == "Price" && e.ListSourceRowIndex != DevExpress.XtraGrid.GridControl.InvalidRowHandle)
-            {
-                decimal price = Convert.ToDecimal(e.Value);
-                var cultureInfo = CultureInfo.GetCultureInfo("da-DE");
-                e.DisplayText = String.Format(cultureInfo, "{0:C}", price);
+                ColumnView view = sender as ColumnView;
+                if (e.Column.FieldName == "Price" && e.ListSourceRowIndex != DevExpress.XtraGrid.GridControl.InvalidRowHandle)
+                {
+                    decimal price = Convert.ToDecimal(e.Value);
+                    var cultureInfo = CultureInfo.GetCultureInfo("da-DE");
+                    e.DisplayText = String.Format(cultureInfo, "{0:C}", price);
                
-            }
+                }
 
             }
             catch (Exception ex)
