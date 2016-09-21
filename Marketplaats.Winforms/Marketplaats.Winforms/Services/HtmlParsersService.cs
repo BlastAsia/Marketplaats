@@ -5,6 +5,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using HtmlAgilityPack;
+using Marketplaats.Winforms.Helper;
 
 namespace Marketplaats.Winforms.Services
 {
@@ -36,23 +37,27 @@ namespace Marketplaats.Winforms.Services
                 {
                     string build = "";
 
-                    var link = child.Descendants("a");
-                    var title = child
-                        .Descendants()
-                        .Single(n => n.GetAttributeValue("class", "")
-                            .Equals("mp-listing-title"))
-                        .InnerText;
+                    var link = child.Attributes["data-url"].Value;
+                    
 
-                    var price = child.Descendants()
-                        .Single(n => n.GetAttributeValue("class", "")
-                            .Equals("price-new ellipsis"))
-                        .InnerText
-                        .Replace("&euro;&nbsp;", "€ ").Trim();
+                    var title = child
+                                .Descendants()
+                                .Single(n => n.GetAttributeValue("class", "")
+                                .Equals("mp-listing-title"))
+                                .InnerText;
+
+                    var price = Convert.ToDouble(
+                                 child.Descendants()
+                                .Single(n => n.GetAttributeValue("class", "")
+                                .Equals("price-new ellipsis"))
+                                .InnerText
+                                .Replace("&euro;&nbsp;", string.Empty).Trim()
+                                .Replace(".", string.Empty).Replace(",", "."));
 
                     var built = child
-                        .Descendants()
-                        .FirstOrDefault(n => n.GetAttributeValue("class", "")
-                            .Equals("mp-listing-attributes"));
+                                .Descendants()
+                                .FirstOrDefault(n => n.GetAttributeValue("class", "")
+                                .Equals("mp-listing-attributes"));
 
 
 
@@ -62,11 +67,31 @@ namespace Marketplaats.Winforms.Services
                     }
 
 
-                    ads.Add(new Advertishments() { Type_ = title, Build = build, Price = price, PhoneNumber = "Make a call" });
+                    ads.Add(new Advertishments() { Type_ = title, Build = build,Price =price, PhoneNumber = "Make a call" ,Link = link});
                 }
             }
-
+            GC.Collect();
+            
             return ads;
+        }
+
+        public string GetPhoneNumber(string link)
+        {
+
+
+            var html = new HtmlDocument();
+            
+
+            html.LoadHtml(new WebClient().DownloadString(link)); 
+            var section = html.DocumentNode.SelectNodes("//div[@class='phone-link alternative']");
+
+            string number = "";
+            if (section != null)
+            {
+                number = section.Single().InnerText;
+            }
+            GC.Collect();
+            return number.ToSkypeFormat();
         }
 
     }

@@ -1,23 +1,17 @@
 ﻿using System;
-using System.CodeDom;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
-using System.Linq;
-using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Columns;
-using Marketplaats.Winforms.Helper;
 using Marketplaats.Winforms.Model;
 using Marketplaats.Winforms.Services;
 using static Marketplaats.Winforms.Properties.Settings;
 using System.Reflection;
-using HtmlAgilityPack;
-using HtmlDocument = HtmlAgilityPack.HtmlDocument;
 
 
 namespace Marketplaats.Winforms
@@ -111,6 +105,7 @@ namespace Marketplaats.Winforms
             }
 
         }
+
         void  start_progress()
         {
             
@@ -129,9 +124,18 @@ namespace Marketplaats.Winforms
             Fetch();    
         }
 
-        private void repositoryItemHyperLinkEdit1_Click(object sender, EventArgs e)
+        private async void repositoryItemHyperLinkEdit1_Click(object sender, EventArgs e)
         {
-            string phoneNumber = gridView1.GetFocusedDisplayText();
+
+            Cursor = Cursors.WaitCursor;
+
+            var link = gridView1.GetRowCellValue(gridView1.FocusedRowHandle,"Link").ToString();
+
+            HtmlParsersService htmlpack = new HtmlParsersService();
+            
+            var phoneNumber = await Task.Run(() => htmlpack.GetPhoneNumber(link));
+
+            Cursor = Cursors.Default;
 
             DialogResult dialogResult = MessageBox.Show("Call this seller using Skype.", $"Skype call to ({phoneNumber})", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
