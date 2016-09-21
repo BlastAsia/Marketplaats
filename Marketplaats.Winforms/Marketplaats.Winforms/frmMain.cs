@@ -12,6 +12,8 @@ using Marketplaats.Winforms.Model;
 using Marketplaats.Winforms.Services;
 using static Marketplaats.Winforms.Properties.Settings;
 using System.Reflection;
+using DevExpress.Utils.Menu;
+using DevExpress.XtraGrid.Views.Grid;
 
 
 namespace Marketplaats.Winforms
@@ -20,7 +22,8 @@ namespace Marketplaats.Winforms
     {
 
         List<Advertishments> _ads;
-        int _timeout = 20000;
+        int _timeout = 30000;
+        int _currentpage = 1;
 
         public frmMain()
         {
@@ -29,15 +32,23 @@ namespace Marketplaats.Winforms
             Version version = Assembly.GetExecutingAssembly().GetName().Version;
             Text = Text + " v" + version.Major + "." + version.Minor;
             lblStatus.Text = "";
+            dropdownpage.DropDownControl = CreateDXPopupMenu();
+            Paging(false);
 
         }
-        
+
+        public int  ResultPerPage
+        {
+            get { return Convert.ToInt32(dropdownpage.Text); }
+            set { dropdownpage.Text = value.ToString(); }
+        }
+
         private  void btnFetch_Click(object sender, EventArgs e)
         {
-            Fetch();
+            Fetch(1, ResultPerPage);
         }
 
-        private async void Fetch()
+        private async void Fetch(int page,int resultperpage)
         {
             try
             {    
@@ -46,11 +57,31 @@ namespace Marketplaats.Winforms
                 //Load and parse
                 HtmlParsersService htmlpack = new HtmlParsersService();
                
-                var task = Task.Run(() => htmlpack.StartParsing());
+                var task = Task.Run(() => htmlpack.StartParsing(page, resultperpage));
 
                 if (await Task.WhenAny(task, Task.Delay(_timeout)) == task)
                 {
                     _ads = task.Result;
+
+                    if (_currentpage == 100)
+                    {
+                        btnForward.Enabled = false;
+                    }
+                    else
+                    {
+                        btnBack.Enabled = true;
+                    }
+
+                    if (_currentpage == 1)
+                    {
+                        btnBack.Enabled = false;
+                    }
+                    else
+                    {
+                        btnForward.Enabled = true;
+                    }
+                    lblPage.Text = _currentpage.ToString();
+
                 }
                 else
                 {
@@ -75,11 +106,9 @@ namespace Marketplaats.Winforms
       
         private void DisplayToListView()
         {
-
-
             gridView1.ClearColumnsFilter();
             grd.DataSource = _ads;
-
+            Paging(true);
 
             ColumnView view = grd.MainView as ColumnView;
             foreach (GridColumn column in view.Columns)
@@ -128,20 +157,22 @@ namespace Marketplaats.Winforms
 
         void  start_progress()
         {
-            
+
+            Cursor = Cursors.WaitCursor;
             progress.Visible = true;
             progress.Style = ProgressBarStyle.Marquee;
         }
 
         void stop_progress()
         {
+            Cursor = Cursors.Default;
             progress.Visible = false;
             progress.Style = ProgressBarStyle.Continuous;
         }
         
         private void frmMain_Load(object sender, EventArgs e)
         {
-            Fetch();    
+            Fetch(1,30);    
         }
 
         private async void repositoryItemHyperLinkEdit1_Click(object sender, EventArgs e)
@@ -211,6 +242,79 @@ namespace Marketplaats.Winforms
                 }
                 
             }
+        }
+
+        private void grd_Layout(object sender, LayoutEventArgs e)
+        {
+           
+            for (int i = 0; i < gridView1.Columns.Count; i++)
+            {
+                gridView1.Columns[i].OptionsFilter.AllowFilter = gridView1.Columns[i].Visible;
+            }
+        }
+
+        void Paging(bool state)
+        {
+            panelPage.Visible = state;
+            panelPage.Enabled = state;
+        }
+
+        private void btnForward_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _currentpage++;
+                Fetch(_currentpage,ResultPerPage);
+                
+            }
+            catch (Exception)
+            {
+                _currentpage--;
+
+
+            }
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                _currentpage--;
+                Fetch(_currentpage, ResultPerPage);
+            }
+            catch (Exception)
+            {
+
+                _currentpage++;
+            }
+            
+            
+        }
+
+        
+        private DXPopupMenu CreateDXPopupMenu()
+        {
+            var menu = new DXPopupMenu();
+            menu.Items.Add(new DXMenuItem("30", OnItemClick));
+            menu.Items.Add(new DXMenuItem("50", OnItemClick));
+            menu.Items.Add(new DXMenuItem("100", OnItemClick));
+            
+            return menu;
+        }
+
+
+
+        private void OnItemClick(object sender, EventArgs e)
+        {
+            DXMenuItem item = sender as DXMenuItem;
+            ResultPerPage = Convert.ToInt32( item.Caption);
+            Fetch(_currentpage, ResultPerPage);
+        }
+
+        private void dropdownpage_Click(object sender, EventArgs e)
+        {
+            dropdownpage.ShowDropDown();
         }
     }
     

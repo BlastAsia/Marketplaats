@@ -43,8 +43,16 @@
             this.Price = new DevExpress.XtraGrid.Columns.GridColumn();
             this.PhoneNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemHyperLinkEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit();
-            this.progress = new System.Windows.Forms.ProgressBar();
             this.Link = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.progress = new System.Windows.Forms.ProgressBar();
+            this.panelPage = new System.Windows.Forms.Panel();
+            this.btnBack = new System.Windows.Forms.Button();
+            this.lblPage = new DevExpress.XtraEditors.LabelControl();
+            this.btnForward = new System.Windows.Forms.Button();
+            this.dropdownpage = new DevExpress.XtraEditors.DropDownButton();
+            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
+            this.lblPageMax = new DevExpress.XtraEditors.LabelControl();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -52,6 +60,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.grd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemHyperLinkEdit1)).BeginInit();
+            this.panelPage.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -63,15 +72,18 @@
             this.tableLayoutPanel1.Controls.Add(this.panel1, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.panel2, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.panelPage, 1, 4);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 4;
+            this.tableLayoutPanel1.RowCount = 6;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 81F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(577, 641);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 8F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 33F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 8F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(577, 690);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // panel1
@@ -91,9 +103,10 @@
             // 
             // lblStatus
             // 
+            this.lblStatus.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblStatus.Appearance.Font = new System.Drawing.Font("Tahoma", 9F);
             this.lblStatus.Appearance.ForeColor = System.Drawing.Color.White;
-            this.lblStatus.Location = new System.Drawing.Point(136, 34);
+            this.lblStatus.Location = new System.Drawing.Point(149, 35);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(87, 14);
             this.lblStatus.TabIndex = 3;
@@ -116,11 +129,11 @@
             this.btnReload.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnReload.Image = ((System.Drawing.Image)(resources.GetObject("btnReload.Image")));
             this.btnReload.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnReload.Location = new System.Drawing.Point(8, 25);
+            this.btnReload.Location = new System.Drawing.Point(18, 26);
             this.btnReload.Margin = new System.Windows.Forms.Padding(0);
             this.btnReload.Name = "btnReload";
-            this.btnReload.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.btnReload.Size = new System.Drawing.Size(112, 31);
+            this.btnReload.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            this.btnReload.Size = new System.Drawing.Size(103, 31);
             this.btnReload.TabIndex = 0;
             this.btnReload.Text = "Reload";
             this.btnReload.UseVisualStyleBackColor = true;
@@ -141,7 +154,7 @@
             this.panel2.Location = new System.Drawing.Point(10, 91);
             this.panel2.Margin = new System.Windows.Forms.Padding(0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(557, 540);
+            this.panel2.Size = new System.Drawing.Size(557, 550);
             this.panel2.TabIndex = 4;
             // 
             // grd
@@ -153,10 +166,11 @@
             this.grd.Name = "grd";
             this.grd.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemHyperLinkEdit1});
-            this.grd.Size = new System.Drawing.Size(557, 536);
+            this.grd.Size = new System.Drawing.Size(557, 546);
             this.grd.TabIndex = 5;
             this.grd.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
+            this.grd.Layout += new System.Windows.Forms.LayoutEventHandler(this.grd_Layout);
             // 
             // gridView1
             // 
@@ -297,8 +311,12 @@
             // 
             // Build
             // 
+            this.Build.AppearanceCell.Options.UseTextOptions = true;
+            this.Build.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.Build.AppearanceHeader.ForeColor = System.Drawing.Color.Black;
             this.Build.AppearanceHeader.Options.UseForeColor = true;
+            this.Build.AppearanceHeader.Options.UseTextOptions = true;
+            this.Build.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.Build.Caption = "Built";
             this.Build.FieldName = "Build";
             this.Build.Name = "Build";
@@ -357,6 +375,12 @@
             this.repositoryItemHyperLinkEdit1.Name = "repositoryItemHyperLinkEdit1";
             this.repositoryItemHyperLinkEdit1.Click += new System.EventHandler(this.repositoryItemHyperLinkEdit1_Click);
             // 
+            // Link
+            // 
+            this.Link.Caption = "Link";
+            this.Link.FieldName = "Link";
+            this.Link.Name = "Link";
+            // 
             // progress
             // 
             this.progress.Dock = System.Windows.Forms.DockStyle.Top;
@@ -369,19 +393,118 @@
             this.progress.TabIndex = 4;
             this.progress.Visible = false;
             // 
-            // Link
+            // panelPage
             // 
-            this.Link.Caption = "Link";
-            this.Link.FieldName = "Link";
-            this.Link.Name = "Link";
-            this.Link.Visible = true;
-            this.Link.VisibleIndex = 4;
+            this.panelPage.Controls.Add(this.lblPageMax);
+            this.panelPage.Controls.Add(this.labelControl3);
+            this.panelPage.Controls.Add(this.dropdownpage);
+            this.panelPage.Controls.Add(this.labelControl1);
+            this.panelPage.Controls.Add(this.btnBack);
+            this.panelPage.Controls.Add(this.lblPage);
+            this.panelPage.Controls.Add(this.btnForward);
+            this.panelPage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelPage.Location = new System.Drawing.Point(13, 652);
+            this.panelPage.Name = "panelPage";
+            this.panelPage.Size = new System.Drawing.Size(551, 27);
+            this.panelPage.TabIndex = 5;
+            // 
+            // btnBack
+            // 
+            this.btnBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.btnBack.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.btnBack.Enabled = false;
+            this.btnBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBack.ForeColor = System.Drawing.Color.DarkCyan;
+            this.btnBack.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnBack.Location = new System.Drawing.Point(211, 0);
+            this.btnBack.Margin = new System.Windows.Forms.Padding(0);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Size = new System.Drawing.Size(30, 27);
+            this.btnBack.TabIndex = 0;
+            this.btnBack.Text = "<";
+            this.btnBack.UseVisualStyleBackColor = false;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
+            // 
+            // lblPage
+            // 
+            this.lblPage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.lblPage.Appearance.Font = new System.Drawing.Font("Tahoma", 10F);
+            this.lblPage.Appearance.ForeColor = System.Drawing.SystemColors.MenuHighlight;
+            this.lblPage.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.lblPage.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+            this.lblPage.Location = new System.Drawing.Point(242, 6);
+            this.lblPage.Name = "lblPage";
+            this.lblPage.Size = new System.Drawing.Size(23, 15);
+            this.lblPage.TabIndex = 4;
+            this.lblPage.Text = "1";
+            // 
+            // btnForward
+            // 
+            this.btnForward.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.btnForward.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.btnForward.FlatAppearance.BorderColor = System.Drawing.Color.Red;
+            this.btnForward.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnForward.ForeColor = System.Drawing.Color.DarkCyan;
+            this.btnForward.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnForward.Location = new System.Drawing.Point(298, 0);
+            this.btnForward.Margin = new System.Windows.Forms.Padding(0);
+            this.btnForward.Name = "btnForward";
+            this.btnForward.Size = new System.Drawing.Size(30, 27);
+            this.btnForward.TabIndex = 1;
+            this.btnForward.Text = ">";
+            this.btnForward.UseVisualStyleBackColor = false;
+            this.btnForward.Click += new System.EventHandler(this.btnForward_Click);
+            // 
+            // dropdownpage
+            // 
+            this.dropdownpage.Dock = System.Windows.Forms.DockStyle.Right;
+            this.dropdownpage.Location = new System.Drawing.Point(499, 0);
+            this.dropdownpage.Name = "dropdownpage";
+            this.dropdownpage.Size = new System.Drawing.Size(52, 27);
+            this.dropdownpage.TabIndex = 2;
+            this.dropdownpage.Text = "30";
+            this.dropdownpage.Click += new System.EventHandler(this.dropdownpage_Click);
+            // 
+            // labelControl1
+            // 
+            this.labelControl1.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.labelControl1.Appearance.Font = new System.Drawing.Font("Tahoma", 10F);
+            this.labelControl1.Appearance.ForeColor = System.Drawing.SystemColors.MenuHighlight;
+            this.labelControl1.Location = new System.Drawing.Point(398, 5);
+            this.labelControl1.Name = "labelControl1";
+            this.labelControl1.Size = new System.Drawing.Size(95, 16);
+            this.labelControl1.TabIndex = 6;
+            this.labelControl1.Text = "Result per page:";
+            // 
+            // labelControl3
+            // 
+            this.labelControl3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.labelControl3.Appearance.Font = new System.Drawing.Font("Tahoma", 12F);
+            this.labelControl3.Appearance.ForeColor = System.Drawing.SystemColors.MenuHighlight;
+            this.labelControl3.Location = new System.Drawing.Point(266, 3);
+            this.labelControl3.Name = "labelControl3";
+            this.labelControl3.Size = new System.Drawing.Size(6, 19);
+            this.labelControl3.TabIndex = 8;
+            this.labelControl3.Text = "/";
+            // 
+            // lblPageMax
+            // 
+            this.lblPageMax.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.lblPageMax.Appearance.Font = new System.Drawing.Font("Tahoma", 10F);
+            this.lblPageMax.Appearance.ForeColor = System.Drawing.SystemColors.MenuHighlight;
+            this.lblPageMax.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.lblPageMax.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+            this.lblPageMax.Location = new System.Drawing.Point(274, 6);
+            this.lblPageMax.Name = "lblPageMax";
+            this.lblPageMax.Size = new System.Drawing.Size(23, 15);
+            this.lblPageMax.TabIndex = 9;
+            this.lblPageMax.Text = "55";
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(577, 641);
+            this.ClientSize = new System.Drawing.Size(577, 690);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.Flat;
@@ -398,6 +521,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.grd)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemHyperLinkEdit1)).EndInit();
+            this.panelPage.ResumeLayout(false);
+            this.panelPage.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -420,5 +545,13 @@
         private System.Windows.Forms.Button btnReload;
         private DevExpress.XtraEditors.LabelControl lblStatus;
         private DevExpress.XtraGrid.Columns.GridColumn Link;
+        private System.Windows.Forms.Panel panelPage;
+        private DevExpress.XtraEditors.LabelControl lblPage;
+        private System.Windows.Forms.Button btnBack;
+        private System.Windows.Forms.Button btnForward;
+        private DevExpress.XtraEditors.DropDownButton dropdownpage;
+        private DevExpress.XtraEditors.LabelControl labelControl1;
+        private DevExpress.XtraEditors.LabelControl lblPageMax;
+        private DevExpress.XtraEditors.LabelControl labelControl3;
     }
 }

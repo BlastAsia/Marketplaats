@@ -17,16 +17,16 @@ namespace Marketplaats.Winforms.Services
         {
             
         }
-        public List<Advertishments> StartParsing()
+        public List<Advertishments> StartParsing(int page,int resultperpage)
         {
             var html = new HtmlDocument();
             var ads = new List<Advertishments>();
-          
-                
-                html.LoadHtml(new WebClient().DownloadString("http://www.marktplaats.nl/z/auto-s.html?startDateFrom=today&categoryId=91")); // load a string
+
+            var url = $"http://www.marktplaats.nl/z/auto-s.html?startDateFrom=today&categoryId=91&currentPage={page}&numberOfResultsPerPage={resultperpage}";
+                html.LoadHtml(new WebClient().DownloadString(url)); // load a string
                 var section = html.DocumentNode.SelectNodes("//section[@class='search-results-table table']");
             
-                for (int i = 0; i < 1; i++)
+                for (int i = 0; i < 2; i++)
                 {
 
 
@@ -90,6 +90,12 @@ namespace Marketplaats.Winforms.Services
 
             return number.ToSkypeFormat();
             
+        }
+
+        public int GetMaxPage()
+        {
+
+            return 100;
         }
 
     }
