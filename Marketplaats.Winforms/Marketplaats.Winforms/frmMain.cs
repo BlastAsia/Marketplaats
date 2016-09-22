@@ -45,7 +45,8 @@ namespace Marketplaats.Winforms
 
         private  void btnFetch_Click(object sender, EventArgs e)
         {
-            Fetch(1, ResultPerPage);
+            _currentpage = 1;
+            Fetch(_currentpage, ResultPerPage);
         }
 
         private async void Fetch(int page,int resultperpage)
@@ -56,31 +57,39 @@ namespace Marketplaats.Winforms
             
                 //Load and parse
                 HtmlParsersService htmlpack = new HtmlParsersService();
-               
-                var task = Task.Run(() => htmlpack.StartParsing(page, resultperpage));
+
+                int maxpage = 0;
+                var task = Task.Run(() => htmlpack.StartParsing(page, resultperpage,ref maxpage));
 
                 if (await Task.WhenAny(task, Task.Delay(_timeout)) == task)
                 {
                     _ads = task.Result;
 
-                    if (_currentpage == 100)
+
+                    if (maxpage == 1)
                     {
                         btnForward.Enabled = false;
-                    }
-                    else
-                    {
-                        btnBack.Enabled = true;
-                    }
-
-                    if (_currentpage == 1)
-                    {
                         btnBack.Enabled = false;
                     }
                     else
                     {
+                        btnBack.Enabled = true;
                         btnForward.Enabled = true;
+
+                        if (_currentpage == maxpage)
+                        {
+                            btnForward.Enabled = false;
+                        }
+                        else if (_currentpage == 1)
+                        {
+                            btnBack.Enabled = false;
+                        }
+
                     }
+                    
+
                     lblPage.Text = _currentpage.ToString();
+                    lblPageMax.Text = maxpage.ToString();
 
                 }
                 else
@@ -172,7 +181,8 @@ namespace Marketplaats.Winforms
         
         private void frmMain_Load(object sender, EventArgs e)
         {
-            Fetch(1,30);    
+            _currentpage = 1;
+            Fetch(_currentpage, ResultPerPage);
         }
 
         private async void repositoryItemHyperLinkEdit1_Click(object sender, EventArgs e)
@@ -214,7 +224,12 @@ namespace Marketplaats.Winforms
             catch (Exception ex)
             {
                 Cursor = Cursors.Default;
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (ex.Message.Equals("The system cannot find the file specified"))
+                {
+                    MessageBox.Show(ex.Message + "\nPlease make sure Skype is installed",
+                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                
             }
         }
 
@@ -309,6 +324,7 @@ namespace Marketplaats.Winforms
         {
             DXMenuItem item = sender as DXMenuItem;
             ResultPerPage = Convert.ToInt32( item.Caption);
+            _currentpage = 1;
             Fetch(_currentpage, ResultPerPage);
         }
 

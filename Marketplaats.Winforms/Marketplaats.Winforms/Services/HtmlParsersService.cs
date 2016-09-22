@@ -17,22 +17,26 @@ namespace Marketplaats.Winforms.Services
         {
             
         }
-        public List<Advertishments> StartParsing(int page,int resultperpage)
+        public List<Advertishments> StartParsing(int page,int resultperpage, ref int maxpage)
         {
             var html = new HtmlDocument();
             var ads = new List<Advertishments>();
 
             var url = $"http://www.marktplaats.nl/z/auto-s.html?startDateFrom=today&categoryId=91&currentPage={page}&numberOfResultsPerPage={resultperpage}";
-                html.LoadHtml(new WebClient().DownloadString(url)); // load a string
-                var section = html.DocumentNode.SelectNodes("//section[@class='search-results-table table']");
+            html.LoadHtml(new WebClient().DownloadString(url)); 
+            var section = html.DocumentNode.SelectNodes("//section[@class='search-results-table table']");
+
+            maxpage = GetMaxPage(html);
             
+
+
                 for (int i = 0; i < 2; i++)
                 {
 
 
                     var sections = section.Descendants()
-                        .Where(n => n.GetAttributeValue("class", "")
-                            .Equals($"row search-result defaultSnippet group-{i} listing-aurora"));
+                                    .Where(n => n.GetAttributeValue("class", "")
+                                    .Equals($"row search-result defaultSnippet group-{i} listing-aurora"));
 
                     foreach (var child in sections)
                     {
@@ -69,7 +73,10 @@ namespace Marketplaats.Winforms.Services
                         ads.Add(new Advertishments() { Type_ = title, Build = build,Price =price, PhoneNumber = "Make a call" ,Link = link});
                     }
                 }
-                GC.Collect();
+
+            
+
+            GC.Collect();
             
             return ads;
         }
@@ -92,10 +99,24 @@ namespace Marketplaats.Winforms.Services
             
         }
 
-        public int GetMaxPage()
+        public int GetMaxPage(HtmlDocument html)
         {
+            
+            var pagination = html.DocumentNode.SelectNodes("//div[@class='pagination']");
 
-            return 100;
+            int number = 1;
+            if (pagination != null)
+            {
+                var maxpage = pagination
+                            .Descendants()
+                            .Single(n => n.GetAttributeValue("class", "")
+                            .Equals("last"))
+                            .InnerText;
+
+                return Convert.ToInt32(maxpage);
+            }
+
+            return number;
         }
 
     }
