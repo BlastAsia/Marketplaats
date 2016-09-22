@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Marketplaats.Winforms.Helper;
 using static Marketplaats.Winforms.Properties.Settings;
 
 namespace Marketplaats.Winforms
@@ -16,11 +17,14 @@ namespace Marketplaats.Winforms
         static void Main()
         {
 
+
+           
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                Application.Run(new frmMain());
+
             
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmMain());
-        
+
         }
     }
 }

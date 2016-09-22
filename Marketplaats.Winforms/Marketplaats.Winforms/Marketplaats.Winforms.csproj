@@ -95,6 +95,7 @@
     <Compile Include="Helper\Extensions.cs" />
     <Compile Include="Helper\Handlers.cs" />
     <Compile Include="Helper\SimpleServer.cs" />
+    <Compile Include="Helper\Utilities.cs" />
     <Compile Include="Model\AccessToken.cs" />
     <Compile Include="Model\BoxUser.cs" />
     <Compile Include="Program.cs" />
@@ -116,6 +117,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="Marktplaats Car Ads.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

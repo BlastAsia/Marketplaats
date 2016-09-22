@@ -14,6 +14,7 @@ using static Marketplaats.Winforms.Properties.Settings;
 using System.Reflection;
 using DevExpress.Utils.Menu;
 using DevExpress.XtraGrid.Views.Grid;
+using Marketplaats.Winforms.Helper;
 
 
 namespace Marketplaats.Winforms
@@ -52,9 +53,19 @@ namespace Marketplaats.Winforms
         private async void Fetch(int page,int resultperpage)
         {
             try
-            {    
+            {
+
+
+                
+
                 start_progress();
-            
+
+                if (!Utilities.CheckForInternetConnection())
+                {
+                    throw    new Exception("Can't connect to remote server. Please check your internet connection.");
+                }
+
+
                 //Load and parse
                 HtmlParsersService htmlpack = new HtmlParsersService();
 
@@ -63,33 +74,42 @@ namespace Marketplaats.Winforms
 
                 if (await Task.WhenAny(task, Task.Delay(_timeout)) == task)
                 {
-                    _ads = task.Result;
 
-
-                    if (maxpage == 1)
+                    if (task.IsFaulted)
                     {
-                        btnForward.Enabled = false;
-                        btnBack.Enabled = false;
+                        throw  task.Exception;
                     }
                     else
                     {
-                        btnBack.Enabled = true;
-                        btnForward.Enabled = true;
+                        _ads = task.Result;
 
-                        if (_currentpage == maxpage)
+
+                        if (maxpage == 1)
                         {
                             btnForward.Enabled = false;
-                        }
-                        else if (_currentpage == 1)
-                        {
                             btnBack.Enabled = false;
                         }
+                        else
+                        {
+                            btnBack.Enabled = true;
+                            btnForward.Enabled = true;
 
+                            if (_currentpage == maxpage)
+                            {
+                                btnForward.Enabled = false;
+                            }
+                            else if (_currentpage == 1)
+                            {
+                                btnBack.Enabled = false;
+                            }
+
+                        }
+
+
+                        lblPage.Text = _currentpage.ToString();
+                        lblPageMax.Text = maxpage.ToString();
                     }
-                    
-
-                    lblPage.Text = _currentpage.ToString();
-                    lblPageMax.Text = maxpage.ToString();
+                   
 
                 }
                 else
@@ -226,8 +246,17 @@ namespace Marketplaats.Winforms
                 Cursor = Cursors.Default;
                 if (ex.Message.Equals("The system cannot find the file specified"))
                 {
-                    MessageBox.Show(ex.Message + "\nPlease make sure Skype is installed",
+                    MessageBox.Show(ex.Message + "\nPlease make sure Skype is installed.",
                         "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else if (ex.Message.Equals("Connection Time-Out"))
+                {
+                    MessageBox.Show(ex.Message + ". Please check your internet connection.",
+                       "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 
             }
@@ -331,6 +360,11 @@ namespace Marketplaats.Winforms
         private void dropdownpage_Click(object sender, EventArgs e)
         {
             dropdownpage.ShowDropDown();
+        }
+
+        private void btnHelp_Click(object sender, EventArgs e)
+        {
+            Process.Start("Marktplaats Car Ads.pdf");
         }
     }
     

@@ -19,84 +19,106 @@ namespace Marketplaats.Winforms.Services
         }
         public List<Advertishments> StartParsing(int page,int resultperpage, ref int maxpage)
         {
-            var html = new HtmlDocument();
-            var ads = new List<Advertishments>();
+            try
+            {
 
-            var url = $"http://www.marktplaats.nl/z/auto-s.html?startDateFrom=today&categoryId=91&currentPage={page}&numberOfResultsPerPage={resultperpage}";
-            html.LoadHtml(new WebClient().DownloadString(url)); 
-            var section = html.DocumentNode.SelectNodes("//section[@class='search-results-table table']");
+                var html = new HtmlDocument();
+                var ads = new List<Advertishments>();
 
-            maxpage = GetMaxPage(html);
+                var url = $"http://www.marktplaats.nl/z/auto-s.html?startDateFrom=today&categoryId=91&currentPage={page}&numberOfResultsPerPage={resultperpage}";
+                html.LoadHtml(new WebClient().DownloadString(url)); 
+                var section = html.DocumentNode.SelectNodes("//section[@class='search-results-table table']");
+
+                maxpage = GetMaxPage(html);
             
 
 
-                for (int i = 0; i < 2; i++)
-                {
-
-
-                    var sections = section.Descendants()
-                                    .Where(n => n.GetAttributeValue("class", "")
-                                    .Equals($"row search-result defaultSnippet group-{i} listing-aurora"));
-
-                    foreach (var child in sections)
+                    for (int i = 0; i < 2; i++)
                     {
-                        string build = "";
 
-                        var link = child.Attributes["data-url"].Value;
-                    
 
-                        var title = child
-                                    .Descendants()
-                                    .Single(n => n.GetAttributeValue("class", "")
-                                    .Equals("mp-listing-title"))
-                                    .InnerText;
+                        var sections = section.Descendants()
+                                        .Where(n => n.GetAttributeValue("class", "")
+                                        .Equals($"row search-result defaultSnippet group-{i} listing-aurora"));
 
-                         var price = child.Descendants()
-                                    .Single(n => n.GetAttributeValue("class", "")
-                                    .Equals("price-new ellipsis"))
-                                    .InnerText
-                                    .Replace("&euro;&nbsp;", string.Empty).Trim()
-                                    .Replace(".", string.Empty).Replace(",", ".").ToDouble();
-
-                        var built = child
-                                    .Descendants()
-                                    .FirstOrDefault(n => n.GetAttributeValue("class", "")
-                                    .Equals("mp-listing-attributes"));
-
-                    
-                        if (built != null)
+                        foreach (var child in sections)
                         {
-                            build = built.InnerText;
+                            string build = "";
+
+                            var link = child.Attributes["data-url"].Value;
+                    
+
+                            var title = child
+                                        .Descendants()
+                                        .Single(n => n.GetAttributeValue("class", "")
+                                        .Equals("mp-listing-title"))
+                                        .InnerText;
+
+                             var price = child.Descendants()
+                                        .Single(n => n.GetAttributeValue("class", "")
+                                        .Equals("price-new ellipsis"))
+                                        .InnerText
+                                        .Replace("&euro;&nbsp;", string.Empty).Trim()
+                                        .Replace(".", string.Empty).Replace(",", ".").ToDouble();
+
+                            var built = child
+                                        .Descendants()
+                                        .FirstOrDefault(n => n.GetAttributeValue("class", "")
+                                        .Equals("mp-listing-attributes"));
+
+                    
+                            if (built != null)
+                            {
+                                build = built.InnerText;
+                            }
+
+
+                            ads.Add(new Advertishments() { Type_ = title, Build = build,Price =price, PhoneNumber = "Make a call" ,Link = link});
                         }
-
-
-                        ads.Add(new Advertishments() { Type_ = title, Build = build,Price =price, PhoneNumber = "Make a call" ,Link = link});
                     }
-                }
 
             
 
-            GC.Collect();
+                GC.Collect();
             
-            return ads;
+                return ads;
+
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
         }
 
         public string GetPhoneNumber(string link)
         {
-           
-            var html = new HtmlDocument();
-            
-            html.LoadHtml(new WebClient().DownloadString(link));
-            var section = html.DocumentNode.SelectNodes("//div[@class='phone-link alternative']");
 
-            string number = "";
-            if (section != null)
+            try
             {
-                number = section.Single().InnerText;
+
+            
+           
+                var html = new HtmlDocument();
+            
+                html.LoadHtml(new WebClient().DownloadString(link));
+                var section = html.DocumentNode.SelectNodes("//div[@class='phone-link alternative']");
+
+                string number = "";
+                if (section != null)
+                {
+                    number = section.Single().InnerText;
+                }
+
+                return number.ToSkypeFormat();
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
             }
 
-            return number.ToSkypeFormat();
-            
         }
 
         public int GetMaxPage(HtmlDocument html)
@@ -118,6 +140,7 @@ namespace Marketplaats.Winforms.Services
 
             return number;
         }
+
 
     }
 }

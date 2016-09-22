@@ -45,5 +45,7 @@ namespace Marketplaats.Winforms.Helper
 			_listener.Stop();
 			_listener.Close();
 		}
+
+
 	}
 }
