@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -44,6 +45,7 @@
             this.PhoneNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemHyperLinkEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit();
             this.Link = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.toolTipController1 = new DevExpress.Utils.ToolTipController(this.components);
             this.progress = new System.Windows.Forms.ProgressBar();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.btnHelp = new System.Windows.Forms.PictureBox();
@@ -55,6 +57,7 @@
             this.btnBack = new System.Windows.Forms.Button();
             this.lblPage = new DevExpress.XtraEditors.LabelControl();
             this.btnForward = new System.Windows.Forms.Button();
+            this.PriceDesc = new DevExpress.XtraGrid.Columns.GridColumn();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -172,6 +175,7 @@
             this.repositoryItemHyperLinkEdit1});
             this.grd.Size = new System.Drawing.Size(557, 546);
             this.grd.TabIndex = 5;
+            this.grd.ToolTipController = this.toolTipController1;
             this.grd.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
             this.grd.Layout += new System.Windows.Forms.LayoutEventHandler(this.grd_Layout);
@@ -289,6 +293,7 @@
             this.Build,
             this.Price,
             this.PhoneNumber,
+            this.PriceDesc,
             this.Link});
             this.gridView1.GridControl = this.grd;
             this.gridView1.Name = "gridView1";
@@ -388,6 +393,14 @@
             this.Link.Caption = "Link";
             this.Link.FieldName = "Link";
             this.Link.Name = "Link";
+            // 
+            // toolTipController1
+            // 
+            this.toolTipController1.AppearanceTitle.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
+            this.toolTipController1.AppearanceTitle.Options.UseFont = true;
+            this.toolTipController1.Rounded = true;
+            this.toolTipController1.ToolTipType = DevExpress.Utils.ToolTipType.SuperTip;
+            this.toolTipController1.GetActiveObjectInfo += new DevExpress.Utils.ToolTipControllerGetActiveObjectInfoEventHandler(this.toolTipController1_GetActiveObjectInfo);
             // 
             // progress
             // 
@@ -537,6 +550,13 @@
             this.btnForward.UseVisualStyleBackColor = false;
             this.btnForward.Click += new System.EventHandler(this.btnForward_Click);
             // 
+            // PriceDesc
+            // 
+            this.PriceDesc.Caption = "PriceDesc";
+            this.PriceDesc.FieldName = "PriceDesc";
+            this.PriceDesc.Name = "PriceDesc";
+            this.PriceDesc.UnboundType = DevExpress.Data.UnboundColumnType.String;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -594,5 +614,7 @@
         private DevExpress.XtraEditors.LabelControl labelControl3;
         private System.Windows.Forms.PictureBox btnHelp;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private DevExpress.Utils.ToolTipController toolTipController1;
+        private DevExpress.XtraGrid.Columns.GridColumn PriceDesc;
     }
 }

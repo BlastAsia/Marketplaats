@@ -6,6 +6,7 @@
         public string Build { get; set; }
         public double Price { get; set; }
         public string PhoneNumber { get; set; }
+        public string PriceDesc { get; set; }
         public string Link { get; set; }
     }
 }

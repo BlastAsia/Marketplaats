@@ -12,8 +12,10 @@ using Marketplaats.Winforms.Model;
 using Marketplaats.Winforms.Services;
 using static Marketplaats.Winforms.Properties.Settings;
 using System.Reflection;
+using DevExpress.Utils;
 using DevExpress.Utils.Menu;
 using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using DevExpress.XtraGrid.Views.Layout.Modes;
 using Marketplaats.Winforms.Helper;
 
@@ -39,46 +41,47 @@ namespace Marketplaats.Winforms
 
         }
 
-        public int  ResultPerPage
+        public int ResultPerPage
         {
             get { return Convert.ToInt32(dropdownpage.Text); }
             set { dropdownpage.Text = value.ToString(); }
         }
 
-        private  void btnFetch_Click(object sender, EventArgs e)
+        private void btnFetch_Click(object sender, EventArgs e)
         {
             _currentpage = 1;
             Fetch(_currentpage, ResultPerPage);
         }
 
-        private async void Fetch(int page,int resultperpage)
+        private async void Fetch(int page, int resultperpage)
         {
             try
             {
 
 
-                
+
 
                 start_progress();
                 var netconnection = Utilities.CheckForInternetConnection();
-                if (string.IsNullOrEmpty(netconnection) && !netconnection.Equals("An exception occurred during a Ping request.") )
+                if (!string.IsNullOrEmpty(netconnection) &&
+                    !netconnection.Equals("An exception occurred during a Ping request."))
                 {
-                    throw    new Exception("Can't connect to remote server. Please check your internet connection.");
+                    throw new Exception("Can't connect to remote server. Please check your internet connection.");
                 }
-                
+
 
                 //Load and parse
                 HtmlParsersService htmlpack = new HtmlParsersService();
 
                 int maxpage = 0;
-                var task = Task.Run(() => htmlpack.StartParsing(page, resultperpage,ref maxpage));
+                var task = Task.Run(() => htmlpack.StartParsing(page, resultperpage, ref maxpage));
 
                 if (await Task.WhenAny(task, Task.Delay(_timeout)) == task)
                 {
 
                     if (task.IsFaulted)
                     {
-                        throw  task.Exception;
+                        throw task.Exception;
                     }
                     else
                     {
@@ -110,7 +113,7 @@ namespace Marketplaats.Winforms
                         lblPage.Text = _currentpage.ToString();
                         lblPageMax.Text = maxpage.ToString();
                     }
-                   
+
 
                 }
                 else
@@ -118,12 +121,12 @@ namespace Marketplaats.Winforms
                     throw new Exception("Connection Time-Out");
                 }
 
-            
+
                 //Load data to grid
                 DisplayToListView();
 
                 stop_progress();
-                lblStatus.Text = $"Last reload { DateTime.Now.ToShortTimeString()}";
+                lblStatus.Text = $"Last reload {DateTime.Now.ToShortTimeString()}";
 
             }
             catch (Exception ex)
@@ -133,7 +136,7 @@ namespace Marketplaats.Winforms
             }
         }
 
-      
+
         private void DisplayToListView()
         {
             gridView1.ClearColumnsFilter();
@@ -185,7 +188,7 @@ namespace Marketplaats.Winforms
 
         }
 
-        void  start_progress()
+        void start_progress()
         {
 
             Cursor = Cursors.WaitCursor;
@@ -199,7 +202,7 @@ namespace Marketplaats.Winforms
             progress.Visible = false;
             progress.Style = ProgressBarStyle.Continuous;
         }
-        
+
         private void frmMain_Load(object sender, EventArgs e)
         {
             _currentpage = 1;
@@ -210,13 +213,13 @@ namespace Marketplaats.Winforms
         {
             try
             {
-                
+
                 Cursor = Cursors.WaitCursor;
 
-                var link = gridView1.GetRowCellValue(gridView1.FocusedRowHandle,"Link").ToString();
+                var link = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Link").ToString();
 
                 HtmlParsersService htmlpack = new HtmlParsersService();
-                
+
                 string phoneNumber = string.Empty;
 
                 var task = Task.Run(() => htmlpack.GetPhoneNumber(link));
@@ -229,12 +232,13 @@ namespace Marketplaats.Winforms
                 {
                     throw new Exception("Connection Time-Out");
                 }
-                
+
                 Cursor = Cursors.Default;
 
-                DialogResult dialogResult = MessageBox.Show("Call this seller using Skype.", $"Skype call to ({phoneNumber})", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult dialogResult = MessageBox.Show("Call this seller using Skype.",
+                    $"Skype call to ({phoneNumber})", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-                if(dialogResult == DialogResult.Yes)
+                if (dialogResult == DialogResult.Yes)
                 {
                     ProcessStartInfo startInfo = new ProcessStartInfo();
                     startInfo.FileName = "skype.exe";
@@ -253,13 +257,13 @@ namespace Marketplaats.Winforms
                 else if (ex.Message.Equals("Connection Time-Out"))
                 {
                     MessageBox.Show(ex.Message + ". Please check your internet connection.",
-                       "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
                     MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                
+
             }
         }
 
@@ -268,11 +272,12 @@ namespace Marketplaats.Winforms
             try
             {
                 ColumnView view = sender as ColumnView;
-                if (e.Column.FieldName == "Price" && e.ListSourceRowIndex != DevExpress.XtraGrid.GridControl.InvalidRowHandle)
+                if (e.Column.FieldName == "Price" &&
+                    e.ListSourceRowIndex != DevExpress.XtraGrid.GridControl.InvalidRowHandle)
                 {
                     var cultureInfo = CultureInfo.GetCultureInfo("nl-NL");
                     e.DisplayText = String.Format(cultureInfo, "{0:C2}", e.Value);
-               
+
                 }
 
             }
@@ -282,13 +287,13 @@ namespace Marketplaats.Winforms
                 {
                     e.DisplayText = e.Value.ToString();
                 }
-                
+
             }
         }
 
         private void grd_Layout(object sender, LayoutEventArgs e)
         {
-           
+
             for (int i = 0; i < gridView1.Columns.Count; i++)
             {
                 gridView1.Columns[i].OptionsFilter.AllowFilter = gridView1.Columns[i].Visible;
@@ -306,8 +311,8 @@ namespace Marketplaats.Winforms
             try
             {
                 _currentpage++;
-                Fetch(_currentpage,ResultPerPage);
-                
+                Fetch(_currentpage, ResultPerPage);
+
             }
             catch (Exception)
             {
@@ -330,18 +335,18 @@ namespace Marketplaats.Winforms
 
                 _currentpage++;
             }
-            
-            
+
+
         }
 
-        
+
         private DXPopupMenu CreateDXPopupMenu()
         {
             var menu = new DXPopupMenu();
             menu.Items.Add(new DXMenuItem("30", OnItemClick));
             menu.Items.Add(new DXMenuItem("50", OnItemClick));
             menu.Items.Add(new DXMenuItem("100", OnItemClick));
-            
+
             return menu;
         }
 
@@ -350,7 +355,7 @@ namespace Marketplaats.Winforms
         private void OnItemClick(object sender, EventArgs e)
         {
             DXMenuItem item = sender as DXMenuItem;
-            ResultPerPage = Convert.ToInt32( item.Caption);
+            ResultPerPage = Convert.ToInt32(item.Caption);
             _currentpage = 1;
             Fetch(_currentpage, ResultPerPage);
         }
@@ -372,7 +377,7 @@ namespace Marketplaats.Winforms
             if (e.MenuType == DevExpress.XtraGrid.Views.Grid.GridMenuType.Row)
             {
                 int rowHandle = e.HitInfo.RowHandle;
-               
+
                 DXMenuItem item = CreateMergingEnabledMenuItem(view, rowHandle);
                 item.BeginGroup = false;
                 e.Menu.Items.Add(item);
@@ -384,8 +389,8 @@ namespace Marketplaats.Winforms
         DXMenuItem CreateMergingEnabledMenuItem(GridView view, int rowHandle)
         {
             DXMenuItem item = new DXMenuItem("View in Browser", new EventHandler(onClick));
-            
-            
+
+
             return item;
         }
 
@@ -396,7 +401,35 @@ namespace Marketplaats.Winforms
             Process.Start(link);
 
         }
-        
+
+        private void toolTipController1_GetActiveObjectInfo(object sender, ToolTipControllerGetActiveObjectInfoEventArgs e)
+        {
+            if (e.SelectedControl != grd) return;
+
+            ToolTipControlInfo info = null;
+            //Get the view at the current mouse position
+            GridView view = grd.GetViewAt(e.ControlMousePosition) as GridView;
+            if (view == null) return;
+            //Get the view's element information that resides at the current position
+            GridHitInfo hi = view.CalcHitInfo(e.ControlMousePosition);
+            //Display a hint for row indicator cells
+            if (hi.HitTest == GridHitTest.RowCell)
+            {
+                //An object that uniquely identifies a row indicator cell
+                if(hi.Column.GetCaption().Equals("Price"))
+                {
+                    int price = Convert.ToInt32( gridView1.GetRowCellValue(hi.RowHandle, "Price"));
+
+                    if (price == 0)
+                    {
+                        object o = hi.HitTest.ToString() + hi.RowHandle;
+                        string priceDesc = gridView1.GetRowCellValue(hi.RowHandle, "PriceDesc").ToString();
+                        info = new ToolTipControlInfo(o, priceDesc);
+                    }
+                }
+            }
+            //Supply tooltip information
+            e.Info = info;
+        }
     }
-    
 }

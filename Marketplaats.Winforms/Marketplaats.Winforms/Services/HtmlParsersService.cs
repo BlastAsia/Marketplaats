@@ -30,10 +30,10 @@ namespace Marketplaats.Winforms.Services
                 var section = html.DocumentNode.SelectNodes("//section[@class='search-results-table table']");
 
                 maxpage = GetMaxPage(html);
-            
+                
 
 
-                    for (int i = 0; i < 2; i++)
+                for (int i = 0; i < 2; i++)
                     {
 
 
@@ -61,6 +61,16 @@ namespace Marketplaats.Winforms.Services
                                         .Replace("&euro;&nbsp;", string.Empty).Trim()
                                         .Replace(".", string.Empty).Replace(",", ".").ToDouble();
 
+                        string priceDesc = "";
+                        if (price == 0)
+                            {
+                                priceDesc = child.Descendants()
+                                        .Single(n => n.GetAttributeValue("class", "")
+                                        .Equals("price-new ellipsis"))
+                                        .InnerText
+                                        .Replace("&euro;&nbsp;", string.Empty).Trim();
+                            }
+
                             var built = child
                                         .Descendants()
                                         .FirstOrDefault(n => n.GetAttributeValue("class", "")
@@ -73,7 +83,10 @@ namespace Marketplaats.Winforms.Services
                             }
 
 
-                            ads.Add(new Advertishments() { Type_ = title, Build = build,Price =price, PhoneNumber = "Make a call" ,Link = link});
+                            ads.Add(new Advertishments() { Type_ = title, Build = build, Price = price,
+                                                           PhoneNumber = "Make a call" ,
+                                                            PriceDesc = priceDesc, Link = link,
+                                                            });
                         }
                     }
 
