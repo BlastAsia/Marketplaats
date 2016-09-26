@@ -56,83 +56,77 @@ namespace Marketplaats.Winforms
         private async void Fetch(int page, int resultperpage)
         {
             try
-            {
-
-
-
-
+            {   
                 start_progress();
                 var netconnection = Utilities.CheckForInternetConnection();
-                if (!string.IsNullOrEmpty(netconnection) &&
-                    !netconnection.Equals("An exception occurred during a Ping request."))
-                {
-                    throw new Exception("Can't connect to remote server. Please check your internet connection.");
-                }
-
-
-                //Load and parse
-                HtmlParsersService htmlpack = new HtmlParsersService();
-
-                int maxpage = 0;
-                var task = Task.Run(() => htmlpack.StartParsing(page, resultperpage, ref maxpage));
-
-                if (await Task.WhenAny(task, Task.Delay(_timeout)) == task)
+                if (netconnection.Equals("Connected") || netconnection.Equals("An exception occurred during a Ping request."))
                 {
 
-                    if (task.IsFaulted)
-                    {
-                        throw task.Exception;
-                    }
-                    else
-                    {
-                        _ads = task.Result;
+                    //Load and parse
+                    HtmlParsersService htmlpack = new HtmlParsersService();
 
+                    int maxpage = 0;
+                    var task = Task.Run(() => htmlpack.StartParsing(page, resultperpage, ref maxpage));
 
-                        if (maxpage == 1)
+                    if (await Task.WhenAny(task, Task.Delay(_timeout)) == task)
+                    {
+
+                        if (task.IsFaulted)
                         {
-                            btnForward.Enabled = false;
-                            btnBack.Enabled = false;
+                            throw task.Exception;
                         }
                         else
                         {
-                            btnBack.Enabled = true;
-                            btnForward.Enabled = true;
+                            _ads = task.Result;
 
-                            if (_currentpage == maxpage)
+
+                            if (maxpage == 1)
                             {
                                 btnForward.Enabled = false;
-                            }
-                            else if (_currentpage == 1)
-                            {
                                 btnBack.Enabled = false;
                             }
+                            else
+                            {
+                                btnBack.Enabled = true;
+                                btnForward.Enabled = true;
 
+                                if (_currentpage == maxpage)
+                                {
+                                    btnForward.Enabled = false;
+                                }
+                                else if (_currentpage == 1)
+                                {
+                                    btnBack.Enabled = false;
+                                }
+
+                            }
+
+
+                            lblPage.Text = _currentpage.ToString();
+                            lblPageMax.Text = maxpage.ToString();
                         }
-
-
-                        lblPage.Text = _currentpage.ToString();
-                        lblPageMax.Text = maxpage.ToString();
+                        
                     }
+                    else
+                    {
+                        throw new Exception("Please check your internet connection.");
+                    }
+                    
+                    //Load data to grid
+                    DisplayToListView();
 
-
+                    stop_progress();
+                    lblStatus.Text = $"Last reload {DateTime.Now.ToShortTimeString()}";
                 }
                 else
                 {
-                    throw new Exception("Connection Time-Out");
+                    throw new Exception("Please check your internet connection.");
                 }
-
-
-                //Load data to grid
-                DisplayToListView();
-
-                stop_progress();
-                lblStatus.Text = $"Last reload {DateTime.Now.ToShortTimeString()}";
-
             }
             catch (Exception ex)
             {
                 stop_progress();
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Please check your internet connection.", "Connection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -230,7 +224,7 @@ namespace Marketplaats.Winforms
                 }
                 else
                 {
-                    throw new Exception("Connection Time-Out");
+                    throw new Exception("Please check your internet connection.");
                 }
 
                 Cursor = Cursors.Default;
@@ -252,16 +246,16 @@ namespace Marketplaats.Winforms
                 if (ex.Message.Equals("The system cannot find the file specified"))
                 {
                     MessageBox.Show(ex.Message + "\nPlease make sure Skype is installed.",
-                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        "Skype is missing", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 else if (ex.Message.Equals("Connection Time-Out"))
                 {
                     MessageBox.Show(ex.Message + ". Please check your internet connection.",
-                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        "Connection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 else
                 {
-                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(ex.Message, "Connection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
 
             }

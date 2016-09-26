@@ -44,6 +44,7 @@
             this.Price = new DevExpress.XtraGrid.Columns.GridColumn();
             this.PhoneNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemHyperLinkEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit();
+            this.PriceDesc = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Link = new DevExpress.XtraGrid.Columns.GridColumn();
             this.toolTipController1 = new DevExpress.Utils.ToolTipController(this.components);
             this.progress = new System.Windows.Forms.ProgressBar();
@@ -57,7 +58,6 @@
             this.btnBack = new System.Windows.Forms.Button();
             this.lblPage = new DevExpress.XtraEditors.LabelControl();
             this.btnForward = new System.Windows.Forms.Button();
-            this.PriceDesc = new DevExpress.XtraGrid.Columns.GridColumn();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -90,7 +90,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 8F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 33F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 8F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(577, 690);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(803, 690);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // panel1
@@ -105,7 +105,7 @@
             this.panel1.Location = new System.Drawing.Point(10, 10);
             this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(557, 81);
+            this.panel1.Size = new System.Drawing.Size(783, 81);
             this.panel1.TabIndex = 2;
             // 
             // lblStatus
@@ -123,7 +123,7 @@
             // 
             this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(481, 8);
+            this.pictureBox1.Location = new System.Drawing.Point(707, 8);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(68, 66);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -161,7 +161,7 @@
             this.panel2.Location = new System.Drawing.Point(10, 91);
             this.panel2.Margin = new System.Windows.Forms.Padding(0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(557, 550);
+            this.panel2.Size = new System.Drawing.Size(783, 550);
             this.panel2.TabIndex = 4;
             // 
             // grd
@@ -173,7 +173,7 @@
             this.grd.Name = "grd";
             this.grd.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemHyperLinkEdit1});
-            this.grd.Size = new System.Drawing.Size(557, 546);
+            this.grd.Size = new System.Drawing.Size(783, 546);
             this.grd.TabIndex = 5;
             this.grd.ToolTipController = this.toolTipController1;
             this.grd.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -318,7 +318,7 @@
             this.Type_.UnboundType = DevExpress.Data.UnboundColumnType.String;
             this.Type_.Visible = true;
             this.Type_.VisibleIndex = 0;
-            this.Type_.Width = 250;
+            this.Type_.Width = 400;
             // 
             // Build
             // 
@@ -336,7 +336,7 @@
             this.Build.UnboundType = DevExpress.Data.UnboundColumnType.String;
             this.Build.Visible = true;
             this.Build.VisibleIndex = 1;
-            this.Build.Width = 80;
+            this.Build.Width = 98;
             // 
             // Price
             // 
@@ -355,7 +355,7 @@
             this.Price.UnboundType = DevExpress.Data.UnboundColumnType.String;
             this.Price.Visible = true;
             this.Price.VisibleIndex = 2;
-            this.Price.Width = 110;
+            this.Price.Width = 137;
             // 
             // PhoneNumber
             // 
@@ -374,7 +374,7 @@
             this.PhoneNumber.UnboundType = DevExpress.Data.UnboundColumnType.String;
             this.PhoneNumber.Visible = true;
             this.PhoneNumber.VisibleIndex = 3;
-            this.PhoneNumber.Width = 99;
+            this.PhoneNumber.Width = 130;
             // 
             // repositoryItemHyperLinkEdit1
             // 
@@ -387,6 +387,13 @@
             this.repositoryItemHyperLinkEdit1.ImageAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.repositoryItemHyperLinkEdit1.Name = "repositoryItemHyperLinkEdit1";
             this.repositoryItemHyperLinkEdit1.Click += new System.EventHandler(this.repositoryItemHyperLinkEdit1_Click);
+            // 
+            // PriceDesc
+            // 
+            this.PriceDesc.Caption = "PriceDesc";
+            this.PriceDesc.FieldName = "PriceDesc";
+            this.PriceDesc.Name = "PriceDesc";
+            this.PriceDesc.UnboundType = DevExpress.Data.UnboundColumnType.String;
             // 
             // Link
             // 
@@ -409,7 +416,7 @@
             this.progress.Location = new System.Drawing.Point(0, 0);
             this.progress.MarqueeAnimationSpeed = 10;
             this.progress.Name = "progress";
-            this.progress.Size = new System.Drawing.Size(557, 4);
+            this.progress.Size = new System.Drawing.Size(783, 4);
             this.progress.Step = 40;
             this.progress.TabIndex = 4;
             this.progress.Visible = false;
@@ -427,7 +434,7 @@
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(557, 33);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(783, 33);
             this.tableLayoutPanel2.TabIndex = 6;
             // 
             // btnHelp
@@ -455,7 +462,7 @@
             this.panelPage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelPage.Location = new System.Drawing.Point(28, 3);
             this.panelPage.Name = "panelPage";
-            this.panelPage.Size = new System.Drawing.Size(526, 27);
+            this.panelPage.Size = new System.Drawing.Size(752, 27);
             this.panelPage.TabIndex = 5;
             // 
             // lblPageMax
@@ -465,7 +472,7 @@
             this.lblPageMax.Appearance.ForeColor = System.Drawing.SystemColors.MenuHighlight;
             this.lblPageMax.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.lblPageMax.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-            this.lblPageMax.Location = new System.Drawing.Point(236, 5);
+            this.lblPageMax.Location = new System.Drawing.Point(349, 5);
             this.lblPageMax.Name = "lblPageMax";
             this.lblPageMax.Size = new System.Drawing.Size(23, 18);
             this.lblPageMax.TabIndex = 9;
@@ -476,7 +483,7 @@
             this.labelControl3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.labelControl3.Appearance.Font = new System.Drawing.Font("Tahoma", 12F);
             this.labelControl3.Appearance.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.labelControl3.Location = new System.Drawing.Point(228, 3);
+            this.labelControl3.Location = new System.Drawing.Point(341, 3);
             this.labelControl3.Name = "labelControl3";
             this.labelControl3.Size = new System.Drawing.Size(6, 19);
             this.labelControl3.TabIndex = 8;
@@ -485,7 +492,7 @@
             // dropdownpage
             // 
             this.dropdownpage.Dock = System.Windows.Forms.DockStyle.Right;
-            this.dropdownpage.Location = new System.Drawing.Point(474, 0);
+            this.dropdownpage.Location = new System.Drawing.Point(700, 0);
             this.dropdownpage.Name = "dropdownpage";
             this.dropdownpage.Size = new System.Drawing.Size(52, 27);
             this.dropdownpage.TabIndex = 2;
@@ -497,7 +504,7 @@
             this.labelControl1.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.labelControl1.Appearance.Font = new System.Drawing.Font("Tahoma", 10F);
             this.labelControl1.Appearance.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.labelControl1.Location = new System.Drawing.Point(373, 5);
+            this.labelControl1.Location = new System.Drawing.Point(599, 5);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(95, 16);
             this.labelControl1.TabIndex = 6;
@@ -511,7 +518,7 @@
             this.btnBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBack.ForeColor = System.Drawing.Color.DarkCyan;
             this.btnBack.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBack.Location = new System.Drawing.Point(173, 0);
+            this.btnBack.Location = new System.Drawing.Point(286, 0);
             this.btnBack.Margin = new System.Windows.Forms.Padding(0);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(30, 27);
@@ -527,7 +534,7 @@
             this.lblPage.Appearance.ForeColor = System.Drawing.SystemColors.MenuHighlight;
             this.lblPage.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.lblPage.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-            this.lblPage.Location = new System.Drawing.Point(204, 5);
+            this.lblPage.Location = new System.Drawing.Point(317, 5);
             this.lblPage.Name = "lblPage";
             this.lblPage.Size = new System.Drawing.Size(23, 18);
             this.lblPage.TabIndex = 4;
@@ -541,7 +548,7 @@
             this.btnForward.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnForward.ForeColor = System.Drawing.Color.DarkCyan;
             this.btnForward.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnForward.Location = new System.Drawing.Point(260, 0);
+            this.btnForward.Location = new System.Drawing.Point(373, 0);
             this.btnForward.Margin = new System.Windows.Forms.Padding(0);
             this.btnForward.Name = "btnForward";
             this.btnForward.Size = new System.Drawing.Size(30, 27);
@@ -550,18 +557,11 @@
             this.btnForward.UseVisualStyleBackColor = false;
             this.btnForward.Click += new System.EventHandler(this.btnForward_Click);
             // 
-            // PriceDesc
-            // 
-            this.PriceDesc.Caption = "PriceDesc";
-            this.PriceDesc.FieldName = "PriceDesc";
-            this.PriceDesc.Name = "PriceDesc";
-            this.PriceDesc.UnboundType = DevExpress.Data.UnboundColumnType.String;
-            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(577, 690);
+            this.ClientSize = new System.Drawing.Size(803, 690);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.Flat;

@@ -36,63 +36,62 @@ namespace Marketplaats.Winforms.Services
 
 
                 for (int i = 0; i < 2; i++)
+                {
+
+
+                    var sections = section.Descendants()
+                                    .Where(n => n.GetAttributeValue("class", "")
+                                    .Equals($"row search-result defaultSnippet group-{i} listing-aurora"));
+
+                    foreach (var child in sections)
                     {
+                        string build = "";
 
-
-                        var sections = section.Descendants()
-                                        .Where(n => n.GetAttributeValue("class", "")
-                                        .Equals($"row search-result defaultSnippet group-{i} listing-aurora"));
-
-                        foreach (var child in sections)
-                        {
-                            string build = "";
-
-                             link = child.Attributes["data-url"].Value;
+                        link = child.Attributes["data-url"].Value;
                             
+                        var title = child
+                                    .Descendants()
+                                    .Single(n => n.GetAttributeValue("class", "")
+                                    .Equals("mp-listing-title"))
+                                    .InnerText;
 
-                            var title = child
-                                        .Descendants()
-                                        .Single(n => n.GetAttributeValue("class", "")
-                                        .Equals("mp-listing-title"))
-                                        .InnerText;
+                         string priceRaw = child.Descendants()
+                                    .Single(n => n.GetAttributeValue("class", "")
+                                    .Equals("price-new ellipsis"))
+                                    .InnerText
+                                    .Replace("&euro;&nbsp;", string.Empty)
+                                    .Trim();
 
-                             string priceRaw = child.Descendants()
-                                        .Single(n => n.GetAttributeValue("class", "")
-                                        .Equals("price-new ellipsis"))
-                                        .InnerText
-                                        .Replace("&euro;&nbsp;", string.Empty)
-                                        .Trim();
-
-                            var price = priceRaw.ToDecimal();
+                        var price = priceRaw.ToDecimal();
 
                         string priceDesc = "";
-                        if (price == 0)
-                            {
-                                priceDesc = child.Descendants()
-                                        .Single(n => n.GetAttributeValue("class", "")
-                                        .Equals("price-new ellipsis"))
-                                        .InnerText
-                                        .Replace("&euro;&nbsp;", string.Empty).Trim();
-                            }
+                    if (price == 0)
+                        {
+                            priceDesc = child.Descendants()
+                                    .Single(n => n.GetAttributeValue("class", "")
+                                    .Equals("price-new ellipsis"))
+                                    .InnerText
+                                    .Replace("&euro;&nbsp;", string.Empty).Trim();
+                        }
 
-                            var built = child
-                                        .Descendants()
-                                        .FirstOrDefault(n => n.GetAttributeValue("class", "")
-                                        .Equals("mp-listing-attributes"));
+                        var built = child
+                                    .Descendants()
+                                    .FirstOrDefault(n => n.GetAttributeValue("class", "")
+                                    .Equals("mp-listing-attributes"));
 
                     
-                            if (built != null)
-                            {
-                                build = built.InnerText;
-                            }
-
-
-                            ads.Add(new Advertishments() { Type_ = title, Build = build, Price = price,
-                                                           PhoneNumber = "Make a call" ,
-                                                            PriceDesc = priceDesc, Link = link,
-                                                            });
+                        if (built != null)
+                        {
+                            build = built.InnerText;
                         }
+
+
+                        ads.Add(new Advertishments() { Type_ = title, Build = build, Price = price,
+                                                        PhoneNumber = "Make a call" ,
+                                                        PriceDesc = priceDesc, Link = link,
+                                                        });
                     }
+                }
 
             
 
@@ -104,7 +103,6 @@ namespace Marketplaats.Winforms.Services
             }
             catch (Exception ex)
             {
-                MessageBox.Show(link);
                 throw new Exception(ex.Message + "\n" + link);
             }
         }

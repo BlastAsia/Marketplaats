@@ -20,7 +20,14 @@ namespace Marketplaats.Winforms.Helper
                 int timeout = 2000;
                 PingOptions pingOptions = new PingOptions();
                 PingReply reply = myPing.Send(host, timeout, buffer, pingOptions);
-                return string.Empty;
+                if (reply.Status == IPStatus.TimedOut)
+                {
+                    return "TimeOut";
+                }
+                else
+                {
+                    return "Connected";
+                }
             }
             catch (Exception ex)
             {
