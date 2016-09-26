@@ -58,8 +58,9 @@ namespace Marketplaats.Winforms.Services
                                         .Single(n => n.GetAttributeValue("class", "")
                                         .Equals("price-new ellipsis"))
                                         .InnerText
-                                        .Replace("&euro;&nbsp;", string.Empty).Trim()
-                                        .Replace(".", string.Empty).Replace(",", ".").ToDouble();
+                                        .Replace("&euro;&nbsp;", string.Empty)
+                                        .Trim()
+                                        .ToDouble();
 
                         string priceDesc = "";
                         if (price == 0)
