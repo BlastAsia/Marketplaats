@@ -14,6 +14,7 @@ using static Marketplaats.Winforms.Properties.Settings;
 using System.Reflection;
 using DevExpress.Utils.Menu;
 using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraGrid.Views.Layout.Modes;
 using Marketplaats.Winforms.Helper;
 
 
@@ -59,12 +60,12 @@ namespace Marketplaats.Winforms
                 
 
                 start_progress();
-
-                if (!Utilities.CheckForInternetConnection())
+                var netconnection = Utilities.CheckForInternetConnection();
+                if (string.IsNullOrEmpty(netconnection) && !netconnection.Equals("An exception occurred during a Ping request.") )
                 {
                     throw    new Exception("Can't connect to remote server. Please check your internet connection.");
                 }
-
+                
 
                 //Load and parse
                 HtmlParsersService htmlpack = new HtmlParsersService();
@@ -266,14 +267,11 @@ namespace Marketplaats.Winforms
         {
             try
             {
-
-            
                 ColumnView view = sender as ColumnView;
                 if (e.Column.FieldName == "Price" && e.ListSourceRowIndex != DevExpress.XtraGrid.GridControl.InvalidRowHandle)
                 {
-                    decimal price = Convert.ToDecimal(e.Value);
-                    var cultureInfo = CultureInfo.GetCultureInfo("da-DE");
-                    e.DisplayText = String.Format(cultureInfo, "{0:C}", price);
+                    var cultureInfo = CultureInfo.GetCultureInfo("nl-NL");
+                    e.DisplayText = String.Format(cultureInfo, "{0:C2}", e.Value);
                
                 }
 
@@ -366,6 +364,39 @@ namespace Marketplaats.Winforms
         {
             Process.Start("Marktplaats Car Ads.pdf");
         }
+
+        private void gridView1_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
+        {
+            GridView view = sender as GridView;
+            // Check whether a row is right-clicked.
+            if (e.MenuType == DevExpress.XtraGrid.Views.Grid.GridMenuType.Row)
+            {
+                int rowHandle = e.HitInfo.RowHandle;
+               
+                DXMenuItem item = CreateMergingEnabledMenuItem(view, rowHandle);
+                item.BeginGroup = false;
+                e.Menu.Items.Add(item);
+
+            }
+        }
+
+        // Create a check menu item that triggers the Boolean AllowCellMerge option.
+        DXMenuItem CreateMergingEnabledMenuItem(GridView view, int rowHandle)
+        {
+            DXMenuItem item = new DXMenuItem("View in Browser", new EventHandler(onClick));
+            
+            
+            return item;
+        }
+
+        //The handler for the DeleteRow menu item
+        void onClick(object sender, EventArgs e)
+        {
+            var link = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Link").ToString();
+            Process.Start(link);
+
+        }
+        
     }
     
 }

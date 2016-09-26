@@ -46,7 +46,7 @@ namespace Marketplaats.Winforms.Services
                             string build = "";
 
                             var link = child.Attributes["data-url"].Value;
-                    
+                            
 
                             var title = child
                                         .Descendants()
@@ -97,9 +97,6 @@ namespace Marketplaats.Winforms.Services
 
             try
             {
-
-            
-           
                 var html = new HtmlDocument();
             
                 html.LoadHtml(new WebClient().DownloadString(link));

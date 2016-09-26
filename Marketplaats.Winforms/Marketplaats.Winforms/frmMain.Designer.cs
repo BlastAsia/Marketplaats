@@ -297,6 +297,7 @@
             this.gridView1.OptionsView.ShowFilterPanelMode = DevExpress.XtraGrid.Views.Base.ShowFilterPanelMode.ShowAlways;
             this.gridView1.OptionsView.ShowGroupedColumns = true;
             this.gridView1.PaintStyleName = "Skin";
+            this.gridView1.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(this.gridView1_PopupMenuShowing);
             this.gridView1.CustomColumnDisplayText += new DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventHandler(this.gridView1_CustomColumnDisplayText);
             // 
             // Type_
@@ -341,7 +342,6 @@
             this.Price.AppearanceHeader.Options.UseTextOptions = true;
             this.Price.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.Price.Caption = "Price";
-            this.Price.DisplayFormat.FormatString = "c2";
             this.Price.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.Price.FieldName = "Price";
             this.Price.Name = "Price";

@@ -10,21 +10,21 @@ namespace Marketplaats.Winforms.Helper
 {
     public static class Utilities
     {
-        public static bool CheckForInternetConnection()
+        public static string CheckForInternetConnection()
         {
             try
             {
                 Ping myPing = new Ping();
-                String host = "google.com";
+                String host = "www.google.com";
                 byte[] buffer = new byte[32];
-                int timeout = 1000;
+                int timeout = 2000;
                 PingOptions pingOptions = new PingOptions();
                 PingReply reply = myPing.Send(host, timeout, buffer, pingOptions);
-                return (reply.Status == IPStatus.Success);
+                return string.Empty;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return false;
+                return ex.Message;
             }
         }
     }
