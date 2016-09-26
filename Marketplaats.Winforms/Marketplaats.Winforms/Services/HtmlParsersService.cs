@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -19,6 +20,7 @@ namespace Marketplaats.Winforms.Services
         }
         public List<Advertishments> StartParsing(int page,int resultperpage, ref int maxpage)
         {
+            string link = "";
             try
             {
 
@@ -45,7 +47,7 @@ namespace Marketplaats.Winforms.Services
                         {
                             string build = "";
 
-                            var link = child.Attributes["data-url"].Value;
+                             link = child.Attributes["data-url"].Value;
                             
 
                             var title = child
@@ -54,13 +56,14 @@ namespace Marketplaats.Winforms.Services
                                         .Equals("mp-listing-title"))
                                         .InnerText;
 
-                             var price = child.Descendants()
+                             string priceRaw = child.Descendants()
                                         .Single(n => n.GetAttributeValue("class", "")
                                         .Equals("price-new ellipsis"))
                                         .InnerText
                                         .Replace("&euro;&nbsp;", string.Empty)
-                                        .Trim()
-                                        .ToDouble();
+                                        .Trim();
+
+                            var price = priceRaw.ToDecimal();
 
                         string priceDesc = "";
                         if (price == 0)
@@ -101,8 +104,8 @@ namespace Marketplaats.Winforms.Services
             }
             catch (Exception ex)
             {
-
-                throw new Exception(ex.Message);
+                MessageBox.Show(link);
+                throw new Exception(ex.Message + "\n" + link);
             }
         }
 

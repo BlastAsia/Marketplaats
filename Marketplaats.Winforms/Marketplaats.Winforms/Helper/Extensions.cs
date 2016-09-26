@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.IO;
 using System.Text;
 using libphonenumber;
@@ -47,19 +48,35 @@ namespace Marketplaats.Winforms.Helper
             return strNumber;
 	    }
 
-	    public static double ToDouble(this object value)
-	    {
-	        try
-	        {
-	          return  Convert.ToDouble(value);
-	        }
-	        catch (Exception)
-	        {
+        public static double ToDouble(this object value)
+        {
+            try
+            {
+                return Convert.ToDouble(value);
+            }
+            catch (Exception)
+            {
 
-	            return 0D;
-	        }
-	    }
+                return 0D;
+            }
+        }
 
+        public static decimal ToDecimal(this object value)
+        {
+            try
+            {
+                return Decimal.Parse(value.ToString(), NumberStyles.AllowDecimalPoint | NumberStyles.AllowThousands,
+                    new CultureInfo("nl-NL"));
+            }
+            catch (Exception)
+            {
+
+                return 0;
+            }
+        }
+
+
+        
 
     }
 }

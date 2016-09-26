@@ -276,6 +276,8 @@ namespace Marketplaats.Winforms
                     e.ListSourceRowIndex != DevExpress.XtraGrid.GridControl.InvalidRowHandle)
                 {
                     var cultureInfo = CultureInfo.GetCultureInfo("nl-NL");
+
+                    
                     e.DisplayText = String.Format(cultureInfo, "{0:C2}", e.Value);
 
                 }
