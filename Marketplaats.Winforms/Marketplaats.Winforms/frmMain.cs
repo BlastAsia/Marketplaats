@@ -442,7 +442,7 @@ namespace Marketplaats.Winforms
                     
 
                     object o = hi.HitTest.ToString() + hi.RowHandle;
-                    string desc = "You can click the link to view the actual ads in browser";
+                    string desc = "You can click the link to view the original ad in the browser";
                     info = new ToolTipControlInfo(o, desc,"View in Browser");
                     
                 }

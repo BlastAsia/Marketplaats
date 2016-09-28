@@ -60,9 +60,9 @@
             this.PriceDesc = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Link = new DevExpress.XtraGrid.Columns.GridColumn();
             this.toolTipController1 = new DevExpress.Utils.ToolTipController(this.components);
+            this.btnHelp = new System.Windows.Forms.PictureBox();
             this.progress = new System.Windows.Forms.ProgressBar();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnHelp = new System.Windows.Forms.PictureBox();
             this.panelPage = new System.Windows.Forms.Panel();
             this.lblPageMax = new DevExpress.XtraEditors.LabelControl();
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
@@ -81,8 +81,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemHyperLinkEdit2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemHyperLinkEdit1)).BeginInit();
-            this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnHelp)).BeginInit();
+            this.tableLayoutPanel2.SuspendLayout();
             this.panelPage.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -143,7 +143,7 @@
             this.labelControl2.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.labelControl2.Appearance.Font = new System.Drawing.Font("Tahoma", 15F);
             this.labelControl2.Appearance.ForeColor = System.Drawing.Color.White;
-            this.labelControl2.Location = new System.Drawing.Point(638, 6);
+            this.labelControl2.Location = new System.Drawing.Point(638, 10);
             this.labelControl2.Name = "labelControl2";
             this.labelControl2.Size = new System.Drawing.Size(27, 24);
             this.labelControl2.TabIndex = 13;
@@ -497,6 +497,25 @@
             this.toolTipController1.ToolTipType = DevExpress.Utils.ToolTipType.SuperTip;
             this.toolTipController1.GetActiveObjectInfo += new DevExpress.Utils.ToolTipControllerGetActiveObjectInfoEventHandler(this.toolTipController1_GetActiveObjectInfo);
             // 
+            // btnHelp
+            // 
+            this.btnHelp.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.btnHelp.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnHelp.Image = ((System.Drawing.Image)(resources.GetObject("btnHelp.Image")));
+            this.btnHelp.Location = new System.Drawing.Point(3, 6);
+            this.btnHelp.Name = "btnHelp";
+            this.btnHelp.Size = new System.Drawing.Size(19, 21);
+            this.btnHelp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            toolTipTitleItem3.Text = "Help";
+            toolTipItem3.LeftIndent = 6;
+            toolTipItem3.Text = "View User\'s Guide";
+            superToolTip3.Items.Add(toolTipTitleItem3);
+            superToolTip3.Items.Add(toolTipItem3);
+            this.toolTipController1.SetSuperTip(this.btnHelp, superToolTip3);
+            this.btnHelp.TabIndex = 10;
+            this.btnHelp.TabStop = false;
+            this.btnHelp.Click += new System.EventHandler(this.btnHelp_Click);
+            // 
             // progress
             // 
             this.progress.Dock = System.Windows.Forms.DockStyle.Top;
@@ -524,25 +543,6 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(783, 33);
             this.tableLayoutPanel2.TabIndex = 6;
-            // 
-            // btnHelp
-            // 
-            this.btnHelp.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.btnHelp.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnHelp.Image = ((System.Drawing.Image)(resources.GetObject("btnHelp.Image")));
-            this.btnHelp.Location = new System.Drawing.Point(3, 6);
-            this.btnHelp.Name = "btnHelp";
-            this.btnHelp.Size = new System.Drawing.Size(19, 21);
-            this.btnHelp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            toolTipTitleItem3.Text = "Help";
-            toolTipItem3.LeftIndent = 6;
-            toolTipItem3.Text = "View User\'s Guide";
-            superToolTip3.Items.Add(toolTipTitleItem3);
-            superToolTip3.Items.Add(toolTipItem3);
-            this.toolTipController1.SetSuperTip(this.btnHelp, superToolTip3);
-            this.btnHelp.TabIndex = 10;
-            this.btnHelp.TabStop = false;
-            this.btnHelp.Click += new System.EventHandler(this.btnHelp_Click);
             // 
             // panelPage
             // 
@@ -675,8 +675,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemHyperLinkEdit2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemHyperLinkEdit1)).EndInit();
-            this.tableLayoutPanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.btnHelp)).EndInit();
+            this.tableLayoutPanel2.ResumeLayout(false);
             this.panelPage.ResumeLayout(false);
             this.panelPage.PerformLayout();
             this.ResumeLayout(false);

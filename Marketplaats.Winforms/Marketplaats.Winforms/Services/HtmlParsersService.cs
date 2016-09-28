@@ -45,6 +45,15 @@ namespace Marketplaats.Winforms.Services
 
                     foreach (var child in sections)
                     {
+
+                        var listing = child
+                                    .Descendants()
+                                    .Single(n => n.GetAttributeValue("class", "")
+                                    .Equals("mp-listing-priority-product"))
+                                    .InnerText;
+
+                        if(listing.ToLower().Equals("dagtopper")) continue;
+
                         string build = "";
 
                         link = child.Attributes["data-url"].Value;
