@@ -106,7 +106,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 8F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 33F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 8F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(803, 690);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(874, 690);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // panel1
@@ -124,7 +124,7 @@
             this.panel1.Location = new System.Drawing.Point(10, 10);
             this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(783, 81);
+            this.panel1.Size = new System.Drawing.Size(854, 81);
             this.panel1.TabIndex = 2;
             // 
             // labelControl4
@@ -132,7 +132,7 @@
             this.labelControl4.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.labelControl4.Appearance.Font = new System.Drawing.Font("Tahoma", 8F);
             this.labelControl4.Appearance.ForeColor = System.Drawing.Color.White;
-            this.labelControl4.Location = new System.Drawing.Point(644, 54);
+            this.labelControl4.Location = new System.Drawing.Point(715, 54);
             this.labelControl4.Name = "labelControl4";
             this.labelControl4.Size = new System.Drawing.Size(11, 13);
             this.labelControl4.TabIndex = 14;
@@ -143,7 +143,7 @@
             this.labelControl2.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.labelControl2.Appearance.Font = new System.Drawing.Font("Tahoma", 15F);
             this.labelControl2.Appearance.ForeColor = System.Drawing.Color.White;
-            this.labelControl2.Location = new System.Drawing.Point(638, 10);
+            this.labelControl2.Location = new System.Drawing.Point(709, 10);
             this.labelControl2.Name = "labelControl2";
             this.labelControl2.Size = new System.Drawing.Size(27, 24);
             this.labelControl2.TabIndex = 13;
@@ -153,7 +153,7 @@
             // 
             this.trackBar.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.trackBar.EditValue = 10;
-            this.trackBar.Location = new System.Drawing.Point(656, 8);
+            this.trackBar.Location = new System.Drawing.Point(727, 8);
             this.trackBar.Name = "trackBar";
             this.trackBar.Properties.LargeChange = 2;
             this.trackBar.Properties.Maximum = 20;
@@ -188,7 +188,7 @@
             // 
             this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(707, 8);
+            this.pictureBox1.Location = new System.Drawing.Point(778, 8);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(68, 66);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -206,9 +206,10 @@
             this.btnReload.Name = "btnReload";
             this.btnReload.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
             this.btnReload.Size = new System.Drawing.Size(103, 31);
-            toolTipTitleItem2.Text = "Reload Hotkey";
+            toolTipTitleItem2.Text = "Reload";
             toolTipItem2.LeftIndent = 6;
-            toolTipItem2.Text = "You can also press [F5] key to reload";
+            toolTipItem2.Text = "Click this button to get the latest cars listing.\r\nYou can also press [F5] key to" +
+    " reload.";
             superToolTip2.Items.Add(toolTipTitleItem2);
             superToolTip2.Items.Add(toolTipItem2);
             this.toolTipController1.SetSuperTip(this.btnReload, superToolTip2);
@@ -232,7 +233,7 @@
             this.panel2.Location = new System.Drawing.Point(10, 91);
             this.panel2.Margin = new System.Windows.Forms.Padding(0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(783, 550);
+            this.panel2.Size = new System.Drawing.Size(854, 550);
             this.panel2.TabIndex = 4;
             // 
             // grd
@@ -245,7 +246,7 @@
             this.grd.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemHyperLinkEdit1,
             this.repositoryItemHyperLinkEdit2});
-            this.grd.Size = new System.Drawing.Size(783, 546);
+            this.grd.Size = new System.Drawing.Size(854, 546);
             this.grd.TabIndex = 5;
             this.grd.ToolTipController = this.toolTipController1;
             this.grd.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -381,8 +382,6 @@
             this.gridView1.OptionsView.ShowFilterPanelMode = DevExpress.XtraGrid.Views.Base.ShowFilterPanelMode.ShowAlways;
             this.gridView1.OptionsView.ShowGroupedColumns = true;
             this.gridView1.PaintStyleName = "Skin";
-            this.gridView1.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
-            new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.Price, DevExpress.Data.ColumnSortOrder.Ascending)});
             this.gridView1.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(this.gridView1_PopupMenuShowing);
             this.gridView1.CustomColumnDisplayText += new DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventHandler(this.gridView1_CustomColumnDisplayText);
             // 
@@ -400,12 +399,14 @@
             this.Type_.UnboundType = DevExpress.Data.UnboundColumnType.String;
             this.Type_.Visible = true;
             this.Type_.VisibleIndex = 0;
-            this.Type_.Width = 400;
+            this.Type_.Width = 437;
             // 
             // repositoryItemHyperLinkEdit2
             // 
             this.repositoryItemHyperLinkEdit2.AutoHeight = false;
             this.repositoryItemHyperLinkEdit2.Name = "repositoryItemHyperLinkEdit2";
+            this.repositoryItemHyperLinkEdit2.SingleClick = true;
+            this.repositoryItemHyperLinkEdit2.StartLinkOnClickingEmptySpace = false;
             this.repositoryItemHyperLinkEdit2.Click += new System.EventHandler(this.repositoryItemHyperLinkEdit2_Click);
             // 
             // Build
@@ -424,7 +425,7 @@
             this.Build.UnboundType = DevExpress.Data.UnboundColumnType.String;
             this.Build.Visible = true;
             this.Build.VisibleIndex = 1;
-            this.Build.Width = 98;
+            this.Build.Width = 100;
             // 
             // Price
             // 
@@ -443,7 +444,7 @@
             this.Price.UnboundType = DevExpress.Data.UnboundColumnType.String;
             this.Price.Visible = true;
             this.Price.VisibleIndex = 2;
-            this.Price.Width = 137;
+            this.Price.Width = 112;
             // 
             // PhoneNumber
             // 
@@ -462,7 +463,7 @@
             this.PhoneNumber.UnboundType = DevExpress.Data.UnboundColumnType.String;
             this.PhoneNumber.Visible = true;
             this.PhoneNumber.VisibleIndex = 3;
-            this.PhoneNumber.Width = 130;
+            this.PhoneNumber.Width = 100;
             // 
             // repositoryItemHyperLinkEdit1
             // 
@@ -474,6 +475,8 @@
             this.repositoryItemHyperLinkEdit1.Image = ((System.Drawing.Image)(resources.GetObject("repositoryItemHyperLinkEdit1.Image")));
             this.repositoryItemHyperLinkEdit1.ImageAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.repositoryItemHyperLinkEdit1.Name = "repositoryItemHyperLinkEdit1";
+            this.repositoryItemHyperLinkEdit1.SingleClick = true;
+            this.repositoryItemHyperLinkEdit1.StartLinkOnClickingEmptySpace = false;
             this.repositoryItemHyperLinkEdit1.Click += new System.EventHandler(this.repositoryItemHyperLinkEdit1_Click);
             // 
             // PriceDesc
@@ -523,7 +526,7 @@
             this.progress.Location = new System.Drawing.Point(0, 0);
             this.progress.MarqueeAnimationSpeed = 10;
             this.progress.Name = "progress";
-            this.progress.Size = new System.Drawing.Size(783, 4);
+            this.progress.Size = new System.Drawing.Size(854, 4);
             this.progress.Step = 40;
             this.progress.TabIndex = 4;
             this.progress.Visible = false;
@@ -541,7 +544,7 @@
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(783, 33);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(854, 33);
             this.tableLayoutPanel2.TabIndex = 6;
             // 
             // panelPage
@@ -556,7 +559,7 @@
             this.panelPage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelPage.Location = new System.Drawing.Point(28, 3);
             this.panelPage.Name = "panelPage";
-            this.panelPage.Size = new System.Drawing.Size(752, 27);
+            this.panelPage.Size = new System.Drawing.Size(823, 27);
             this.panelPage.TabIndex = 5;
             // 
             // lblPageMax
@@ -566,7 +569,7 @@
             this.lblPageMax.Appearance.ForeColor = System.Drawing.SystemColors.MenuHighlight;
             this.lblPageMax.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.lblPageMax.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-            this.lblPageMax.Location = new System.Drawing.Point(349, 5);
+            this.lblPageMax.Location = new System.Drawing.Point(384, 5);
             this.lblPageMax.Name = "lblPageMax";
             this.lblPageMax.Size = new System.Drawing.Size(23, 18);
             this.lblPageMax.TabIndex = 9;
@@ -577,7 +580,7 @@
             this.labelControl3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.labelControl3.Appearance.Font = new System.Drawing.Font("Tahoma", 12F);
             this.labelControl3.Appearance.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.labelControl3.Location = new System.Drawing.Point(341, 3);
+            this.labelControl3.Location = new System.Drawing.Point(376, 3);
             this.labelControl3.Name = "labelControl3";
             this.labelControl3.Size = new System.Drawing.Size(6, 19);
             this.labelControl3.TabIndex = 8;
@@ -586,7 +589,7 @@
             // dropdownpage
             // 
             this.dropdownpage.Dock = System.Windows.Forms.DockStyle.Right;
-            this.dropdownpage.Location = new System.Drawing.Point(700, 0);
+            this.dropdownpage.Location = new System.Drawing.Point(771, 0);
             this.dropdownpage.Name = "dropdownpage";
             this.dropdownpage.Size = new System.Drawing.Size(52, 27);
             this.dropdownpage.TabIndex = 2;
@@ -598,7 +601,7 @@
             this.labelControl1.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.labelControl1.Appearance.Font = new System.Drawing.Font("Tahoma", 10F);
             this.labelControl1.Appearance.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.labelControl1.Location = new System.Drawing.Point(599, 5);
+            this.labelControl1.Location = new System.Drawing.Point(670, 5);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(95, 16);
             this.labelControl1.TabIndex = 6;
@@ -612,7 +615,7 @@
             this.btnBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBack.ForeColor = System.Drawing.Color.DarkCyan;
             this.btnBack.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBack.Location = new System.Drawing.Point(286, 0);
+            this.btnBack.Location = new System.Drawing.Point(321, 0);
             this.btnBack.Margin = new System.Windows.Forms.Padding(0);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(30, 27);
@@ -628,7 +631,7 @@
             this.lblPage.Appearance.ForeColor = System.Drawing.SystemColors.MenuHighlight;
             this.lblPage.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.lblPage.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-            this.lblPage.Location = new System.Drawing.Point(317, 5);
+            this.lblPage.Location = new System.Drawing.Point(352, 5);
             this.lblPage.Name = "lblPage";
             this.lblPage.Size = new System.Drawing.Size(23, 18);
             this.lblPage.TabIndex = 4;
@@ -642,7 +645,7 @@
             this.btnForward.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnForward.ForeColor = System.Drawing.Color.DarkCyan;
             this.btnForward.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnForward.Location = new System.Drawing.Point(373, 0);
+            this.btnForward.Location = new System.Drawing.Point(408, 0);
             this.btnForward.Margin = new System.Windows.Forms.Padding(0);
             this.btnForward.Name = "btnForward";
             this.btnForward.Size = new System.Drawing.Size(30, 27);
@@ -655,7 +658,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(803, 690);
+            this.ClientSize = new System.Drawing.Size(874, 690);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.Flat;
