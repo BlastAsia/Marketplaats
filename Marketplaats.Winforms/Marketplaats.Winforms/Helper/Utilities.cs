@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
+using Marketplaats.Winforms.Properties;
 
 namespace Marketplaats.Winforms.Helper
 {
@@ -33,6 +35,15 @@ namespace Marketplaats.Winforms.Helper
             {
                 return ex.Message;
             }
+        }
+
+
+        public static Font CurrentFont(int size)
+        {
+            Settings.Default.FontSize = size;
+            Settings.Default.Save();
+            return    new Font("Tahoma", size, FontStyle.Regular);
+            
         }
     }
 }

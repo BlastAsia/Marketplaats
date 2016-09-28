@@ -30,8 +30,20 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
+            DevExpress.Utils.SuperToolTip superToolTip1 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem1 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.ToolTipItem toolTipItem1 = new DevExpress.Utils.ToolTipItem();
+            DevExpress.Utils.SuperToolTip superToolTip2 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem2 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.ToolTipItem toolTipItem2 = new DevExpress.Utils.ToolTipItem();
+            DevExpress.Utils.SuperToolTip superToolTip3 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem3 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.ToolTipItem toolTipItem3 = new DevExpress.Utils.ToolTipItem();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
+            this.trackBar = new DevExpress.XtraEditors.TrackBarControl();
             this.lblStatus = new DevExpress.XtraEditors.LabelControl();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnReload = new System.Windows.Forms.Button();
@@ -40,6 +52,7 @@
             this.grd = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.Type_ = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repositoryItemHyperLinkEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit();
             this.Build = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Price = new DevExpress.XtraGrid.Columns.GridColumn();
             this.PhoneNumber = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -60,10 +73,13 @@
             this.btnForward = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemHyperLinkEdit2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemHyperLinkEdit1)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnHelp)).BeginInit();
@@ -98,6 +114,9 @@
             this.panel1.BackColor = System.Drawing.Color.Transparent;
             this.panel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel1.BackgroundImage")));
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panel1.Controls.Add(this.labelControl4);
+            this.panel1.Controls.Add(this.labelControl2);
+            this.panel1.Controls.Add(this.trackBar);
             this.panel1.Controls.Add(this.lblStatus);
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.btnReload);
@@ -107,6 +126,52 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(783, 81);
             this.panel1.TabIndex = 2;
+            // 
+            // labelControl4
+            // 
+            this.labelControl4.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.labelControl4.Appearance.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.labelControl4.Appearance.ForeColor = System.Drawing.Color.White;
+            this.labelControl4.Location = new System.Drawing.Point(644, 54);
+            this.labelControl4.Name = "labelControl4";
+            this.labelControl4.Size = new System.Drawing.Size(11, 13);
+            this.labelControl4.TabIndex = 14;
+            this.labelControl4.Text = "A-";
+            // 
+            // labelControl2
+            // 
+            this.labelControl2.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.labelControl2.Appearance.Font = new System.Drawing.Font("Tahoma", 15F);
+            this.labelControl2.Appearance.ForeColor = System.Drawing.Color.White;
+            this.labelControl2.Location = new System.Drawing.Point(638, 6);
+            this.labelControl2.Name = "labelControl2";
+            this.labelControl2.Size = new System.Drawing.Size(27, 24);
+            this.labelControl2.TabIndex = 13;
+            this.labelControl2.Text = "A+";
+            // 
+            // trackBar
+            // 
+            this.trackBar.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.trackBar.EditValue = 10;
+            this.trackBar.Location = new System.Drawing.Point(656, 8);
+            this.trackBar.Name = "trackBar";
+            this.trackBar.Properties.LargeChange = 2;
+            this.trackBar.Properties.Maximum = 20;
+            this.trackBar.Properties.Minimum = 5;
+            this.trackBar.Properties.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.trackBar.Properties.TickFrequency = 2;
+            this.trackBar.Properties.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
+            this.trackBar.Properties.UseParentBackground = true;
+            this.trackBar.Size = new System.Drawing.Size(45, 66);
+            toolTipTitleItem1.Text = "Font Size";
+            toolTipItem1.LeftIndent = 6;
+            toolTipItem1.Text = "Increase font size by sliding up or Decrease by sliding down";
+            superToolTip1.Items.Add(toolTipTitleItem1);
+            superToolTip1.Items.Add(toolTipItem1);
+            this.trackBar.SuperTip = superToolTip1;
+            this.trackBar.TabIndex = 12;
+            this.trackBar.Value = 10;
+            this.trackBar.EditValueChanged += new System.EventHandler(this.trackBarControl1_EditValueChanged);
             // 
             // lblStatus
             // 
@@ -141,6 +206,12 @@
             this.btnReload.Name = "btnReload";
             this.btnReload.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
             this.btnReload.Size = new System.Drawing.Size(103, 31);
+            toolTipTitleItem2.Text = "Reload Hotkey";
+            toolTipItem2.LeftIndent = 6;
+            toolTipItem2.Text = "You can also press [F5] key to reload";
+            superToolTip2.Items.Add(toolTipTitleItem2);
+            superToolTip2.Items.Add(toolTipItem2);
+            this.toolTipController1.SetSuperTip(this.btnReload, superToolTip2);
             this.btnReload.TabIndex = 0;
             this.btnReload.Text = "Reload";
             this.btnReload.UseVisualStyleBackColor = true;
@@ -172,7 +243,8 @@
             this.grd.Margin = new System.Windows.Forms.Padding(0);
             this.grd.Name = "grd";
             this.grd.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
-            this.repositoryItemHyperLinkEdit1});
+            this.repositoryItemHyperLinkEdit1,
+            this.repositoryItemHyperLinkEdit2});
             this.grd.Size = new System.Drawing.Size(783, 546);
             this.grd.TabIndex = 5;
             this.grd.ToolTipController = this.toolTipController1;
@@ -184,9 +256,11 @@
             // 
             this.gridView1.Appearance.ColumnFilterButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(87)))), ((int)(((byte)(138)))));
             this.gridView1.Appearance.ColumnFilterButton.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(87)))), ((int)(((byte)(138)))));
+            this.gridView1.Appearance.ColumnFilterButton.Font = new System.Drawing.Font("Tahoma", 10F);
             this.gridView1.Appearance.ColumnFilterButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(235)))), ((int)(((byte)(220)))));
             this.gridView1.Appearance.ColumnFilterButton.Options.UseBackColor = true;
             this.gridView1.Appearance.ColumnFilterButton.Options.UseBorderColor = true;
+            this.gridView1.Appearance.ColumnFilterButton.Options.UseFont = true;
             this.gridView1.Appearance.ColumnFilterButton.Options.UseForeColor = true;
             this.gridView1.Appearance.ColumnFilterButtonActive.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(109)))), ((int)(((byte)(158)))));
             this.gridView1.Appearance.ColumnFilterButtonActive.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(109)))), ((int)(((byte)(158)))));
@@ -215,12 +289,16 @@
             this.gridView1.Appearance.FixedLine.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(178)))), ((int)(((byte)(185)))));
             this.gridView1.Appearance.FixedLine.Options.UseBackColor = true;
             this.gridView1.Appearance.FocusedCell.BackColor = System.Drawing.Color.White;
+            this.gridView1.Appearance.FocusedCell.Font = new System.Drawing.Font("Tahoma", 8.5F);
             this.gridView1.Appearance.FocusedCell.ForeColor = System.Drawing.Color.Black;
             this.gridView1.Appearance.FocusedCell.Options.UseBackColor = true;
+            this.gridView1.Appearance.FocusedCell.Options.UseFont = true;
             this.gridView1.Appearance.FocusedCell.Options.UseForeColor = true;
             this.gridView1.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(87)))), ((int)(((byte)(138)))));
+            this.gridView1.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.5F);
             this.gridView1.Appearance.FocusedRow.ForeColor = System.Drawing.Color.White;
             this.gridView1.Appearance.FocusedRow.Options.UseBackColor = true;
+            this.gridView1.Appearance.FocusedRow.Options.UseFont = true;
             this.gridView1.Appearance.FocusedRow.Options.UseForeColor = true;
             this.gridView1.Appearance.FooterPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(87)))), ((int)(((byte)(138)))));
             this.gridView1.Appearance.FooterPanel.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(87)))), ((int)(((byte)(138)))));
@@ -258,8 +336,10 @@
             this.gridView1.Appearance.HeaderPanel.Options.UseBorderColor = true;
             this.gridView1.Appearance.HeaderPanel.Options.UseForeColor = true;
             this.gridView1.Appearance.HideSelectionRow.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(153)))), ((int)(((byte)(195)))));
+            this.gridView1.Appearance.HideSelectionRow.Font = new System.Drawing.Font("Tahoma", 8.5F);
             this.gridView1.Appearance.HideSelectionRow.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(235)))), ((int)(((byte)(220)))));
             this.gridView1.Appearance.HideSelectionRow.Options.UseBackColor = true;
+            this.gridView1.Appearance.HideSelectionRow.Options.UseFont = true;
             this.gridView1.Appearance.HideSelectionRow.Options.UseForeColor = true;
             this.gridView1.Appearance.HorzLine.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(178)))), ((int)(((byte)(185)))));
             this.gridView1.Appearance.HorzLine.Options.UseBackColor = true;
@@ -273,16 +353,14 @@
             this.gridView1.Appearance.Preview.Options.UseBackColor = true;
             this.gridView1.Appearance.Preview.Options.UseFont = true;
             this.gridView1.Appearance.Preview.Options.UseForeColor = true;
-            this.gridView1.Appearance.Row.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(251)))), ((int)(((byte)(252)))));
-            this.gridView1.Appearance.Row.ForeColor = System.Drawing.Color.Black;
-            this.gridView1.Appearance.Row.Options.UseBackColor = true;
-            this.gridView1.Appearance.Row.Options.UseForeColor = true;
             this.gridView1.Appearance.RowSeparator.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(235)))), ((int)(((byte)(220)))));
             this.gridView1.Appearance.RowSeparator.BackColor2 = System.Drawing.Color.White;
             this.gridView1.Appearance.RowSeparator.Options.UseBackColor = true;
             this.gridView1.Appearance.SelectedRow.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(133)))), ((int)(((byte)(179)))));
+            this.gridView1.Appearance.SelectedRow.Font = new System.Drawing.Font("Tahoma", 8.5F);
             this.gridView1.Appearance.SelectedRow.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(235)))), ((int)(((byte)(220)))));
             this.gridView1.Appearance.SelectedRow.Options.UseBackColor = true;
+            this.gridView1.Appearance.SelectedRow.Options.UseFont = true;
             this.gridView1.Appearance.SelectedRow.Options.UseForeColor = true;
             this.gridView1.Appearance.TopNewRow.BackColor = System.Drawing.Color.White;
             this.gridView1.Appearance.TopNewRow.Options.UseBackColor = true;
@@ -299,9 +377,12 @@
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsView.EnableAppearanceEvenRow = true;
             this.gridView1.OptionsView.EnableAppearanceOddRow = true;
+            this.gridView1.OptionsView.RowAutoHeight = true;
             this.gridView1.OptionsView.ShowFilterPanelMode = DevExpress.XtraGrid.Views.Base.ShowFilterPanelMode.ShowAlways;
             this.gridView1.OptionsView.ShowGroupedColumns = true;
             this.gridView1.PaintStyleName = "Skin";
+            this.gridView1.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
+            new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.Price, DevExpress.Data.ColumnSortOrder.Ascending)});
             this.gridView1.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(this.gridView1_PopupMenuShowing);
             this.gridView1.CustomColumnDisplayText += new DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventHandler(this.gridView1_CustomColumnDisplayText);
             // 
@@ -310,15 +391,22 @@
             this.Type_.AppearanceHeader.ForeColor = System.Drawing.Color.Black;
             this.Type_.AppearanceHeader.Options.UseForeColor = true;
             this.Type_.Caption = "Type";
+            this.Type_.ColumnEdit = this.repositoryItemHyperLinkEdit2;
             this.Type_.FieldName = "Type_";
             this.Type_.Name = "Type_";
-            this.Type_.OptionsColumn.AllowEdit = false;
             this.Type_.OptionsFilter.AllowAutoFilter = false;
             this.Type_.OptionsFilter.FilterPopupMode = DevExpress.XtraGrid.Columns.FilterPopupMode.CheckedList;
+            this.Type_.ToolTip = "You can click the link to view the ads on browser";
             this.Type_.UnboundType = DevExpress.Data.UnboundColumnType.String;
             this.Type_.Visible = true;
             this.Type_.VisibleIndex = 0;
             this.Type_.Width = 400;
+            // 
+            // repositoryItemHyperLinkEdit2
+            // 
+            this.repositoryItemHyperLinkEdit2.AutoHeight = false;
+            this.repositoryItemHyperLinkEdit2.Name = "repositoryItemHyperLinkEdit2";
+            this.repositoryItemHyperLinkEdit2.Click += new System.EventHandler(this.repositoryItemHyperLinkEdit2_Click);
             // 
             // Build
             // 
@@ -446,6 +534,12 @@
             this.btnHelp.Name = "btnHelp";
             this.btnHelp.Size = new System.Drawing.Size(19, 21);
             this.btnHelp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            toolTipTitleItem3.Text = "Help";
+            toolTipItem3.LeftIndent = 6;
+            toolTipItem3.Text = "View User\'s Guide";
+            superToolTip3.Items.Add(toolTipTitleItem3);
+            superToolTip3.Items.Add(toolTipItem3);
+            this.toolTipController1.SetSuperTip(this.btnHelp, superToolTip3);
             this.btnHelp.TabIndex = 10;
             this.btnHelp.TabStop = false;
             this.btnHelp.Click += new System.EventHandler(this.btnHelp_Click);
@@ -573,10 +667,13 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grd)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemHyperLinkEdit2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemHyperLinkEdit1)).EndInit();
             this.tableLayoutPanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.btnHelp)).EndInit();
@@ -616,5 +713,9 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private DevExpress.Utils.ToolTipController toolTipController1;
         private DevExpress.XtraGrid.Columns.GridColumn PriceDesc;
+        private DevExpress.XtraEditors.TrackBarControl trackBar;
+        private DevExpress.XtraEditors.LabelControl labelControl4;
+        private DevExpress.XtraEditors.LabelControl labelControl2;
+        private DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit repositoryItemHyperLinkEdit2;
     }
 }

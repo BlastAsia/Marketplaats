@@ -26,5 +26,8 @@
     <Setting Name="EndPoint_AccessToken" Type="System.String" Scope="User">
       <Value Profile="(Default)">/api/oauth2/token</Value>
     </Setting>
+    <Setting Name="FontSize" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

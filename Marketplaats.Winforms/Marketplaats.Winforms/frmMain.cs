@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.Globalization;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -18,6 +20,7 @@ using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using DevExpress.XtraGrid.Views.Layout.Modes;
 using Marketplaats.Winforms.Helper;
+using Marketplaats.Winforms.Properties;
 
 
 namespace Marketplaats.Winforms
@@ -39,6 +42,17 @@ namespace Marketplaats.Winforms
             dropdownpage.DropDownControl = CreateDXPopupMenu();
             Paging(false);
 
+            var fontsize = Settings.Default.FontSize;
+            trackBar.Value = fontsize;
+
+            if (fontsize == 0)
+            {
+                Settings.Default.FontSize = 10;
+            }
+            var font = Utilities.CurrentFont(Settings.Default.FontSize);
+            SetGridFont(gridView1, font);
+
+            
         }
 
         public int ResultPerPage
@@ -423,9 +437,65 @@ namespace Marketplaats.Winforms
                         info = new ToolTipControlInfo(o, priceDesc);
                     }
                 }
+                else if (hi.Column.GetCaption().Equals("Type"))
+                {
+                    
+
+                    object o = hi.HitTest.ToString() + hi.RowHandle;
+                    string desc = "You can click the link to view the actual ads in browser";
+                    info = new ToolTipControlInfo(o, desc,"View in Browser");
+                    
+                }
             }
             //Supply tooltip information
             e.Info = info;
+        }
+
+        
+        
+        private void trackBarControl1_EditValueChanged(object sender, EventArgs e)
+        {
+            var newFont = Utilities.CurrentFont(trackBar.Value);
+            SetGridFont(gridView1, newFont);
+          
+            
+            gridView1.RowHeight = trackBar.Value + 12;
+            gridView1.ColumnPanelRowHeight = gridView1.RowHeight;
+        }
+
+        public void SetGridFont(GridView view, Font font)
+        {
+            foreach (AppearanceObject ap in view.Appearance)
+            {
+                ap.Font = font;
+            }
+        }
+
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == ( Keys.F5))
+            {
+                _currentpage = 1;
+                Fetch(_currentpage, ResultPerPage);
+                return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        private void repositoryItemHyperLinkEdit2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var link = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Link").ToString();
+                Process.Start(link);
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message, "Connection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            
         }
     }
 }
